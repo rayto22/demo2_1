@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css.map">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <link href="css/style.css" rel="stylesheet">
+  <title>Document</title>
+</head>
+<body>
+  
+  <div class="container">
+<!-- -------------------------------------------------------------------------------------------------- -->
+<!-- HEADER LOGO -->
+<!-- -------------------------------------------------------------------------------------------------- -->
+    <header class="columns header">
+      <div class="column center">
+        <h1 class="is-size-1">HEADER_LOGO</h1>
+      </div>
+    </header>
+
+    <hr></hr>
+    
+<!-- -------------------------------------------------------------------------------------------------- -->
+<!-- SEARCH AND BASKET -->
+<!-- -------------------------------------------------------------------------------------------------- -->
+    <div class="columns search_and_basket_div">
+      <div class="column field is-four-fifths">
+
+        <p class="control has-icons-left has-icons-right">
+          <input class="input search_input" aria-label="search by name" type="text">
+          <span class="icon is-small is-left">
+            <i class="fas fa-search"></i>
+          </span>
+        </p>
+
+      </div>
+
+      <div class="column">
+        <button class="button is-fullwidth">Your basket</button>
+      </div>
+
+    </div>
+
+    <!-- <hr></hr> -->
+
+<!-- -------------------------------------------------------------------------------------------------- -->
+<!-- NAVBAR -->
+<!-- -------------------------------------------------------------------------------------------------- -->
+
+    <div class="columns navigation_bar_div">
+      <div class="column">
+
+        <nav class="navbar has-background-light	" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+              <a class="navbar-item" href="">
+                <i class="fas fa-paw"></i>
+              </a>
+          
+              <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+              </a>
+            </div>
+          
+            <div id="navbarBasicExample" class="navbar-menu">
+              <div class="navbar-start">
+                <a class="navbar-item">
+                  Home
+                </a>
+                <a class="navbar-item nav_category" data-categ-name="bird">
+                  Birds
+                </a>
+                <a class="navbar-item nav_category" data-categ-name="cat">
+                  Cats
+                </a>
+                <a class="navbar-item nav_category" data-categ-name="dog">
+                  Dogs
+                </a>
+                <a class="navbar-item nav_category" data-categ-name="fish">
+                  Fishes
+                </a>
+              </div>
+            </div>
+
+          </nav>
+
+      </div>
+    </div>
+
+<!-- -------------------------------------------------------------------------------------------------- -->
+<!-- FILTERS -->
+<!-- -------------------------------------------------------------------------------------------------- -->
+
+
+    <div class="columns">
+      <aside class="column is-one-fifth">
+
+        <form class="box">
+
+          <h5 class="is-size-5">Filters</h5>
+          <hr></hr>
+
+          <div>
+            <label for="priceRange">Range Price</label>
+            <input id="priceRange" class="slider has-output is-fullwidth" min="1" max="100" value="1" step="1" type="range">
+            <output for="priceRange">50</output>
+          </div>
+
+          <div>
+            <label for="quantityRange">Range Quantity</label>
+            <input id="quantityRange" class="slider has-output is-fullwidth" min="1" max="100" value="1" step="1" type="range">
+            <output for="quantityRange">50</output>
+          </div>
+
+        </form>
+
+        <form class="box">
+
+          <h5>Additional filters</h5>
+
+          <hr></hr>
+          <h6>Property choise 1</h6>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+              Some property 1
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+              Some property 2
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+              Some property 3
+            </label>
+          </div>
+
+          <hr></hr>
+          <h6>Property choise 2</h6>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+            <label class="form-check-label" for="exampleRadios1">
+              Some property 1
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+            <label class="form-check-label" for="exampleRadios2">
+              Some property 2
+            </label>
+          </div>
+
+        </form>
+      </aside>
+
+<!-- -------------------------------------------------------------------------------------------------- -->
+<!-- MAIN WINDOW -->
+<!-- -------------------------------------------------------------------------------------------------- -->
+      <div class="column">
+        <form class="box">
+<!-- -------------------------------------------------------------------------------------------------- -->
+<!-- CANCEL BUTTONS -->
+<!-- -------------------------------------------------------------------------------------------------- -->
+        <div class="columns">
+          
+          <div class="column-9">
+            <a class="button is-rounded cancel_buttons nav_category" data-categ-name="cancel">Category<i class="far cancel_buttons_icons fa-times-circle fa-lg"></i></span></a>
+            <button class="button is-rounded cancel_buttons">Search<i class="far cancel_buttons_icons fa-times-circle fa-lg"></i></span></button>
+            <button class="button is-rounded cancel_buttons">Filters<i class="far cancel_buttons_icons fa-times-circle fa-lg"></i></span></button>
+            <button class="button is-rounded cancel_buttons">Sort<i class="far cancel_buttons_icons fa-times-circle fa-lg"></i></span></button>
+          </div>
+<!-- -------------------------------------------------------------------------------------------------- -->
+<!-- SORT -->
+<!-- -------------------------------------------------------------------------------------------------- -->
+          <div class="column mt-1" style="cursor: pointer">
+            A-B
+          </div>
+          <div class="column mt-1" style="cursor: pointer">
+            Price
+          </div>
+          <div class="column mt-1" style="cursor: pointer">
+            Quantity
+          </div>
+        </div>
+
+        <hr></hr>
+<!-- -------------------------------------------------------------------------------------------------- -->
+<!-- PRODUCTS -->
+<!-- -------------------------------------------------------------------------------------------------- -->
+        <div class="columns is-multiline productList">
+        </div>
+
+      </div>
+
+    </form>
+
+    </div>
+
+    <hr></hr>
+
+<!-- -------------------------------------------------------------------------------------------------- -->
+<!-- FOOTER -->
+<!-- -------------------------------------------------------------------------------------------------- -->
+
+    <footer class="columns">
+      <div class="column center">
+        <h1 class="is-size-1">FOOTER</h1>
+      </div>
+    </footer>
+
+
+
+    
+  </div>
+
+  <script type="module" src="app/main.js"></script>
+
+</body>
+</html>

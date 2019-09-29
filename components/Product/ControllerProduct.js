@@ -2,8 +2,8 @@ import { ModelProduct } from '../Product/ModelProduct.js';
 import { ViewProduct } from '../Product/ViewProduct.js';
 
 class ControllerProduct{
-  constructor(router) {
-    this.router = router;
+  constructor(mainContr) {
+    this.mainController = mainContr;
     this.model = new ModelProduct(this);
     this.view = new ViewProduct(this);
 

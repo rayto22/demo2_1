@@ -3,8 +3,8 @@ import { ViewFilter } from '../Filter/ViewFilter.js';
 
 
 class ControllerFilter{
-  constructor(router) {
-    this.router = router;
+  constructor(mainContr) {
+    this.mainController = mainContr;
     this.model = new ModelFilter(this);
     this.view = new ViewFilter(this);
   }
@@ -14,7 +14,7 @@ class ControllerFilter{
   }
 
   buildFilteredProductList(prodArr) {
-    this.router.product.buildProductList(prodArr);
+    this.mainController.product.buildProductList(prodArr);
   }
 
   getSearchValue(){

@@ -3,20 +3,20 @@ import { ControllerFilter } from '../Filter/ControllerFilter.js';
 import { ControllerSort } from '../Sort/ControllerSort.js';
 
 
-class Router {
+class MainController {
   constructor() {
-      if (!!Router.instance) {
-          return Router.instance;
+      if (!!MainController.instance) {
+          return MainController.instance;
       }
 
       this.product = new ControllerProduct(this);
       this.filter = new ControllerFilter(this);
       this.sort = new ControllerSort(this);
 
-      Router.instance = this;
+      MainController.instance = this;
 
       return this;
   }
 }
 
-export { Router };
+export { MainController };

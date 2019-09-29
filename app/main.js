@@ -1,3 +1,3 @@
-import { Router } from '../components/Router/Router.js';
+import { MainController } from '../components/MainController/MainController.js';
 
-const router = new Router();
+const MainController = new MainController();

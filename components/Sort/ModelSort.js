@@ -13,7 +13,8 @@ class ModelSort{
       localStorage.setItem('sortStatus', JSON.stringify(
         {
           status: "cancel",
-          orderStrict: true
+          orderStrict: true,
+          counter: 0
         }
       ));
     }
@@ -25,12 +26,24 @@ class ModelSort{
   }
 
   setSortStatus(sortType) {
-    if(this.sortStatus.status === sortType && sortType !== "cancel"){
+    if(this.sortStatus.status !== 'cancel'){
+      this.controller.unsetOrderIconToButton(this.sortStatus.status);
+    }
+
+    if(this.sortStatus.counter === 2 && this.sortStatus.status === sortType){
+      this.sortStatus.status = 'cancel';
+      this.sortStatus.orderStrict = true;
+      this.sortStatus.counter = 0;
+    } else if(this.sortStatus.status === sortType && sortType !== "cancel"){
       this.sortStatus.orderStrict = !this.sortStatus.orderStrict;
+      this.sortStatus.counter += 1;
     } else {
       this.sortStatus.status = sortType;
       this.sortStatus.orderStrict = true;
+      this.sortStatus.counter = 1;
     }
+
+    this.controller.setOrderIconToButton(this.sortStatus);
   }
 
   sortProductList(prodArr) {

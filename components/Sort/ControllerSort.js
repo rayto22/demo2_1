@@ -20,6 +20,14 @@ class ControllerSort{
   sortProductList(prodArr) {
     return this.model.sortProductList(prodArr);
   }
+
+  setOrderIconToButton(sortStatus) {
+    this.view.setOrderIconToButton(sortStatus);
+  }
+
+  unsetOrderIconToButton(sortType) {
+    this.view.unsetOrderIconToButton(sortType);
+  }
 }
 
 export { ControllerSort }

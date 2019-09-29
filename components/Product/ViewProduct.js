@@ -9,12 +9,14 @@ class ViewProduct{
 
     prodArr.forEach(prod => {
       this.productListDOM.innerHTML += `
-      <div class="product_div column">
-        <div class="prod_image box center">
-          <div>Image</div>
-        </div>
-        <div class="center prod_name_div">${prod.type} ${prod.name} ${prod.color.join('/')}</div>
-        <div class="has-text-right">${prod.price} $</div>
+      <div class="product_div">
+        <div class="is-pulled-left">
+          <div class="prod_image box center">
+            <div>Image</div>
+          </div>
+          <div class="center prod_name_div">${prod.type} ${prod.name} ${prod.color.join('/')}</div>
+          <div class="has-text-right">${prod.price} $</div>
+        <div>
       </div>`
     });
   }

@@ -175,22 +175,22 @@
 <!-- -------------------------------------------------------------------------------------------------- -->
         <div class="columns">
           
-          <div class="column-9">
-            <a class="button is-rounded cancel_buttons nav_category" data-categ-name="cancel">Category<i class="far cancel_buttons_icons fa-times-circle fa-lg"></i></span></a>
-            <button class="button is-rounded cancel_buttons">Search<i class="far cancel_buttons_icons fa-times-circle fa-lg"></i></span></button>
-            <button class="button is-rounded cancel_buttons">Filters<i class="far cancel_buttons_icons fa-times-circle fa-lg"></i></span></button>
-            <button class="button is-rounded cancel_buttons">Sort<i class="far cancel_buttons_icons fa-times-circle fa-lg"></i></span></button>
+          <div class="column is-9">
+            <a class="button is-rounded nav_category" data-categ-name="cancel">Category<i class="far fa-times-circle fa-lg"></i></span></a>
+            <a class="button is-rounded" data-categ-name="cancel">Search<i class="far fa-times-circle fa-lg"></i></span></a>
+            <a class="button is-rounded" data-categ-name="cancel">Filters<i class="far fa-times-circle fa-lg"></i></span></a>
+            <a class="button is-rounded sort" data-categ-name="cancel">Sort<i class="far fa-times-circle fa-lg"></i></span></a>
           </div>
 <!-- -------------------------------------------------------------------------------------------------- -->
 <!-- SORT -->
 <!-- -------------------------------------------------------------------------------------------------- -->
-          <div class="column mt-1" style="cursor: pointer">
+          <div class="column sort" style="cursor: pointer" data-sort-name="name">
             A-B
           </div>
-          <div class="column mt-1" style="cursor: pointer">
+          <div class="column sort" style="cursor: pointer" data-sort-name="price">
             Price
           </div>
-          <div class="column mt-1" style="cursor: pointer">
+          <div class="column sort" style="cursor: pointer" data-sort-name="quantity">
             Quantity
           </div>
         </div>
@@ -199,13 +199,11 @@
 <!-- -------------------------------------------------------------------------------------------------- -->
 <!-- PRODUCTS -->
 <!-- -------------------------------------------------------------------------------------------------- -->
-        <div class="columns is-multiline productList">
+        <div class="is-multiline productList center">
         </div>
 
       </div>
-
     </form>
-
     </div>
 
     <hr></hr>

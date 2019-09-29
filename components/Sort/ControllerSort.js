@@ -9,15 +9,17 @@ class ControllerSort{
     this.view = new ViewSort(this);
   }
 
-  beginSortProcess() {
-    this.model.beginSortProcess();
+  setSortStatus(sortType) {
+    this.model.setSortStatus(sortType);
   }
 
-  buildSortedProductList(prodArr) {
-    this.mainController.product.buildProductList(prodArr);
+  rebuildProductList() {
+    this.mainController.buildProducts();
   }
 
-
+  sortProductList(prodArr) {
+    return this.model.sortProductList(prodArr);
+  }
 }
 
 export { ControllerSort }

@@ -8,11 +8,7 @@ class ViewFilter{
     [...this.categNavDOMcoll].forEach((categ) => {
       categ.addEventListener('click', () => this.initFilterByCateg(categ.getAttribute('data-categ-name')));
     });
-
-    
-
     this.serchInputDOM.addEventListener('keyup', () => this.initFilterByName());
-
   }
 
   initFilterByName() {
@@ -21,12 +17,12 @@ class ViewFilter{
     } else {
       this.controller.setFilterStatus("name", "cancel");
     }
-    this.controller.beginFilterProcess();
+    this.controller.rebuildProductList();
   }
 
   initFilterByCateg(categName){
     this.controller.setFilterStatus("category", categName);
-    this.controller.beginFilterProcess();
+    this.controller.rebuildProductList();
 
   }
 

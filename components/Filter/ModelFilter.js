@@ -1,13 +1,10 @@
 class ModelFilter{
   constructor(contr) {
     this.controller = contr;
-    this.initFilterStatus();
-    window.addEventListener('unload', () => this.saveFilterStatus());
-  }
 
-  setFilterStatus(filterName, state){
-    console.log(this.filterStatus);
-    this.filterStatus[filterName].status = state;
+    window.addEventListener('unload', () => this.saveFilterStatus());
+
+    this.initFilterStatus();
   }
 
   initFilterStatus() {
@@ -29,11 +26,16 @@ class ModelFilter{
     this.filterStatus = JSON.parse(localStorage.getItem('filterStatus'));
   }
 
+  setFilterStatus(filterName, state){
+    console.log(this.filterStatus);
+    this.filterStatus[filterName].status = state;
+  }
+
   saveFilterStatus(){
     localStorage.setItem('filterStatus', JSON.stringify(this.filterStatus));
   }
 
-  beginFilterProcess(){
+  filterProductList(){
     let prodArr = JSON.parse(localStorage.getItem('productList'));
 
     Object.values(this.filterStatus).forEach((filter) => {
@@ -42,8 +44,8 @@ class ModelFilter{
         prodArr = this[filter.funName](prodArr);
       }
     });
-    console.log(prodArr);
-    this.controller.buildFilteredProductList(prodArr);
+
+    return prodArr;
   }
 
   filterByName(prodArr){
@@ -56,7 +58,6 @@ class ModelFilter{
   filterByCateg(prodArr){
     const categName = this.filterStatus.category.status;
     return prodArr.filter((prodObj) => {
-      console
       return prodObj.type.toLowerCase() === categName;
     })
   }

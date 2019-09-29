@@ -9,12 +9,12 @@ class ControllerFilter{
     this.view = new ViewFilter(this);
   }
 
-  beginFilterProcess() {
-    this.model.beginFilterProcess();
+  filterProductList() {
+    return this.model.filterProductList();
   }
 
-  buildFilteredProductList(prodArr) {
-    this.mainController.product.buildProductList(prodArr);
+  rebuildProductList(){
+    this.mainController.buildProducts();
   }
 
   getSearchValue(){

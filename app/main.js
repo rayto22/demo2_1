@@ -1,3 +1,3 @@
 import { MainController } from '../components/MainController/MainController.js';
 
-const MainController = new MainController();
+const MainC = new MainController();

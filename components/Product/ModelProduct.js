@@ -1,18 +1,19 @@
 class ModelProduct{
   constructor(contr) {
     this.controller = contr;
+
+    this.initProductList();
   }
 
   initProductList() {
-    if(Boolean(localStorage.getItem("productList")) === false){
+    // localStorage.removeItem('productList');
+    if(Boolean(localStorage.getItem('productList')) === false){
       fetch('/data/products.json').then(answ => {
         return answ.json();
       }).then((d) => {
-        localStorage.setItem("productList", JSON.stringify(d));
-        this.controller.buildProductList(d);
+        console.log(d);
+        localStorage.setItem('productList', JSON.stringify(d));
       });
-    } else {
-      this.controller.buildProductList(JSON.parse(localStorage.getItem("productList")));
     }
   }
 

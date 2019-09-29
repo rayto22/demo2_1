@@ -13,16 +13,24 @@ class ControllerFilter{
     return this.model.filterProductList();
   }
 
-  rebuildProductList(){
+  rebuildProductList() {
     this.mainController.buildProducts();
   }
 
-  getSearchValue(){
+  getSearchValue() {
     return this.view.getSearchValue();
   }
 
-  setFilterStatus(name, state){
+  setFilterStatus(name, state) {
     this.model.setFilterStatus(name, state);
+  }
+
+  clearCancelButtonsDiv() {
+    this.view.clearCancelButtonsDiv();
+  }
+
+  renderCancelButton(type) {
+    this.view.renderCancelButton(type);
   }
 }
 

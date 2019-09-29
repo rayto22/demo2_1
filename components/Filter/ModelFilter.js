@@ -12,18 +12,21 @@ class ModelFilter{
     if(Boolean(localStorage.getItem('filterStatus')) === false){
       localStorage.setItem('filterStatus', JSON.stringify(
         {
-          name: {
-            status: "cancel",
-            funName: 'filterByName'
-          },
           category: {
-            status: "cancel",
+            type: 'category',
+            status: 'cancel',
             funName: 'filterByCateg'
+          },
+          name: {
+            type: 'name',
+            status: 'cancel',
+            funName: 'filterByName'
           }
         }
       ));
     }
     this.filterStatus = JSON.parse(localStorage.getItem('filterStatus'));
+
   }
 
   setFilterStatus(filterName, state){
@@ -37,11 +40,12 @@ class ModelFilter{
 
   filterProductList(){
     let prodArr = JSON.parse(localStorage.getItem('productList'));
+    this.controller.clearCancelButtonsDiv();
 
     Object.values(this.filterStatus).forEach((filter) => {
-      if(filter.status !== "cancel"){
-        console.log(prodArr, filter.status);
+      if(filter.status !== 'cancel'){
         prodArr = this[filter.funName](prodArr);
+        this.controller.renderCancelButton(filter.type);
       }
     });
 

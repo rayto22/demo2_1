@@ -40,6 +40,12 @@ class ModelFilter{
     }
     this.filterStatus = JSON.parse(localStorage.getItem('filterStatus'));
     this.controller.setSearchValue(this.filterStatus.name.lastValue);
+    
+    this.controller.renderCategories(this.getCategoriesList());
+  }
+
+  getCategoriesList() {
+    return new Set(JSON.parse(localStorage.getItem('productList')).map(prodObj => prodObj.type));
   }
 
   setFilterProperty(filterName, property, val){
@@ -53,8 +59,7 @@ class ModelFilter{
     localStorage.setItem('filterStatus', JSON.stringify(this.filterStatus));
   }
 
-  filterProductList(){
-    let prodArr = JSON.parse(localStorage.getItem('productList'));
+  filterProductList(prodArr){
     this.controller.clearCancelButtonsDiv();
 
     Object.values(this.filterStatus).forEach((filter) => {

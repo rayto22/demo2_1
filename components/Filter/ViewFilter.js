@@ -1,3 +1,5 @@
+import { Templater} from '../Templater/Templater.js';
+
 class ViewFilter{
   constructor(contr) {
     this.controller = contr;
@@ -30,7 +32,7 @@ class ViewFilter{
         inputDOM: document.querySelector('.search_input')
       },
       category: {
-        navElDOMcoll: document.querySelectorAll('.nav_category')
+        divDOM: document.querySelector('.categories_div')
       },
       price: {
         minInputDOM: document.querySelector('.filter_price_min'),
@@ -45,18 +47,18 @@ class ViewFilter{
       },
       cancelFilter: {
         divDOM: document.querySelector('.cancel_buttuns_div')
-      }
-      
+      } 
+    };
+
+    this.templatePath = {
+      categories: '/components/Filter/categoriesTemplate.html',
+      cancelButton: '/components/Filter/cancelButtonTemplate.html'
     };
 
     this.hangEvents();
   }
 
   hangEvents(){
-    [...this.DOMStorage.category.navElDOMcoll].forEach((categ) => {
-      categ.addEventListener('click', () => this.initFilterByCateg(categ.getAttribute('data-categ-name')));
-    });
-
     this.DOMStorage.name.inputDOM.addEventListener('keyup', () => this.initFilterByName());
 
     this.DOMStorage.price.minInputDOM.addEventListener('keyup', () => this.initFilterByPriceAndQuantity(undefined, 'price'));
@@ -89,8 +91,8 @@ class ViewFilter{
       this.DOMStorage[type].maxInputDOM.value = "";
     } else {
       this.controller.setFilterProperty(type, 'status', true);
-      this.controller.setFilterProperty(type, 'min', Number(this.DOMStorage[type].minInputDOM.value.replace(/\D/g, "")) || 0);
-      this.controller.setFilterProperty(type, 'max', Number(this.DOMStorage[type].maxInputDOM.value.replace(/\D/g, "")) || Infinity);
+      this.controller.setFilterProperty(type, 'min', Number(this.DOMStorage[type].minInputDOM.value.replace(/\D/g, '')) || 0);
+      this.controller.setFilterProperty(type, 'max', Number(this.DOMStorage[type].maxInputDOM.value.replace(/\D/g, '')) || Infinity);
     }
     this.controller.rebuildProductList();
   }
@@ -100,10 +102,39 @@ class ViewFilter{
   }
 
   renderCancelButton(type) {
-    const newDiv = document.createElement('span');
-    this.DOMStorage.cancelFilter.divDOM.appendChild(newDiv);
-    newDiv.innerHTML += `<a class="button is-rounded ${this.cancelBtnObj[type].className}">${this.cancelBtnObj[type].btnName} <i class="far fa-times-circle fa-lg"></i></a>`;
-    document.querySelector(`.${this.cancelBtnObj[type].className}`).addEventListener('click', () => this[this.cancelBtnObj[type].funName]('cancel', type));
+    let arrOfData = [
+      {
+        className: this.cancelBtnObj[type].className, 
+        buttonName: this.cancelBtnObj[type].btnName
+      }];
+
+    let eventObj = {
+      one: [{
+        selector: `.${this.cancelBtnObj[type].className}`,
+        eventName: 'click',
+        funName: () => this[this.cancelBtnObj[type].funName]('cancel', type)
+      }],
+      all: []}
+
+    new Templater(this.templatePath.cancelButton, arrOfData, this.DOMStorage.cancelFilter.divDOM, eventObj, true);
+  }
+
+  renderCategories(categoriesList) {
+    let arrOfData = [...categoriesList].map((categ) => {
+      return {categName: categ, categContent: `${categ}s`};
+    });
+
+    let eventObj = {
+      one: [...categoriesList].map((categ) => {
+        return {
+          selector: `.nav_category[data-categ-name='${categ}']`,
+          eventName: 'click',
+          funName: () => this.initFilterByCateg(categ)
+        }}),
+      all: []
+    };
+
+    new Templater(this.templatePath.categories, arrOfData, this.DOMStorage.category.divDOM, eventObj);
   }
 
   renderAdditionalFilter(categName) {
@@ -114,51 +145,7 @@ class ViewFilter{
         break;
       }
       case 'cat': {
-        this.DOMStorage.additionalFilter.divDOM.innerHTML = `
-        <div class="additional_filter">
-        <div class="box">
-
-          <h5>Additional filters</h5>
-          <hr></hr>
-
-          <h6>Color</h6>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Some property 1
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Some property 2
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Some property 3
-            </label>
-          </div>
-
-          <hr></hr>
-          <h6>Property choise 2</h6>
-
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-            <label class="form-check-label" for="exampleRadios1">
-              Some property 1
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-            <label class="form-check-label" for="exampleRadios2">
-              Some property 2
-            </label>
-          </div>
-
-        </div>
-      </div>`;
+        this.DOMStorage.additionalFilter.divDOM.innerHTML = 'cat'
         break;
       }
       case 'dog': {

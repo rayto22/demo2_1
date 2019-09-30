@@ -11,13 +11,12 @@ class ControllerFilter{
     this.model.initFilterStatus();
   }
 
-
-  filterProductList() {
-    return this.model.filterProductList();
+  filterProductList(prodArr) {
+    return this.model.filterProductList(prodArr);
   }
 
   rebuildProductList() {
-    this.mainController.buildProducts();
+    this.mainController.buildProductList();
   }
 
   getSearchValue() {
@@ -38,6 +37,10 @@ class ControllerFilter{
 
   renderCancelButton(type) {
     this.view.renderCancelButton(type);
+  }
+
+  renderCategories(categoriesList) {
+    this.view.renderCategories(categoriesList);
   }
 }
 

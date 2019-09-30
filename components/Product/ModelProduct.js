@@ -3,16 +3,15 @@ class ModelProduct{
     this.controller = contr;
   }
 
-  initProductList() {
+  getProductList() {
     // localStorage.removeItem('productList');
-    if(Boolean(localStorage.getItem('productList')) === false){
-      fetch('/data/products.json').then(answ => {
-        return answ.json();
-      }).then((d) => {
+
+    return fetch('/data/products.json').then(answ => answ.json())
+      .then((d) => {
         console.log(d);
         localStorage.setItem('productList', JSON.stringify(d));
+        this.controller.buildProductList();
       });
-    }
   }
 
 

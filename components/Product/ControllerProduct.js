@@ -6,14 +6,19 @@ class ControllerProduct{
     this.mainController = mainContr;
     this.model = new ModelProduct(this);
     this.view = new ViewProduct(this);
-
-    this.model.initProductList();
   }
 
-  buildProductList(prodArr) {
-    this.view.buildProductList(prodArr);
+  buildProductList() {
+    this.mainController.buildProductList();
   }
 
+  renderProductList(prodArr) {
+    this.view.renderProductList(prodArr);
+  }
+
+  getProductList() {
+    return this.model.getProductList();
+  }
 }
 
 export { ControllerProduct }

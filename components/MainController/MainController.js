@@ -10,19 +10,26 @@ class MainController {
     }
     MainController.instance = this;
 
-    this.product = new ControllerProduct(this);
     this.filter = new ControllerFilter(this);
     this.sort = new ControllerSort(this);
+    this.product = new ControllerProduct(this);
 
-    this.buildProducts();
+    this.initPage();
 
     return this;
   }
 
-  buildProducts() {
-    let prodArr = this.filter.filterProductList();
+  initPage() {
+    this.product.getProductList().then(
+      
+    );
+  }
+
+  buildProductList() {
+    let prodArr = JSON.parse(localStorage.getItem('productList'));
+    prodArr = this.filter.filterProductList(prodArr);
     this.sort.sortProductList(prodArr);
-    this.product.buildProductList(prodArr);
+    this.product.renderProductList(prodArr);
   }
 }
 

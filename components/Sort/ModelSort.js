@@ -6,7 +6,7 @@ class ModelSort{
   }
 
   initSortStatus() {
-    localStorage.removeItem('sortStatus');
+    // localStorage.removeItem('sortStatus');
     if(Boolean(localStorage.getItem('sortStatus')) === false){
       localStorage.setItem('sortStatus', JSON.stringify(
         {
@@ -40,11 +40,10 @@ class ModelSort{
       this.sortStatus.orderStrict = true;
       this.sortStatus.counter = 1;
     }
-
-    this.controller.setOrderIconToButton(this.sortStatus);
   }
 
   sortProductList(prodArr) {
+    this.controller.setOrderIconToButton(this.sortStatus);
     if(this.sortStatus.status !== "cancel"){
 
       prodArr.sort((a,b) => {

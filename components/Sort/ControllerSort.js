@@ -16,7 +16,7 @@ class ControllerSort{
   }
 
   rebuildProductList() {
-    this.mainController.buildProducts();
+    this.mainController.buildProductList();
   }
 
   sortProductList(prodArr) {

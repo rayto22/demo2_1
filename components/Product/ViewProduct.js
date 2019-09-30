@@ -1,23 +1,43 @@
+import { Templater} from '../Templater/Templater.js';
+
 class ViewProduct{
   constructor(contr) {
     this.controller = contr;
     this.productListDOM = document.querySelector('.productList');
+
+    this.templatePath = {
+      productCard: '/components/Product/productCardTemplate.html'
+    };
+
   }
 
-  buildProductList(prodArr) {
+  renderProductList(prodArr) {
     this.productListDOM.innerHTML = "";
 
     prodArr.forEach(prod => {
-      this.productListDOM.innerHTML += `
-      <div class="product_div">
-        <div class="is-pulled-left">
-          <div class="prod_image box center">
-            <div>Image</div>
-          </div>
-          <div class="center prod_name_div">${prod.type} ${prod.name} ${prod.color.join('/')}</div>
-          <div class="has-text-right">Quantity: ${prod.quantity} || ${prod.price} $</div>
-        <div>
-      </div>`
+
+      if(prod.quantity <= 0){
+        return;
+      }
+
+      let arrOfData = [
+        {
+          id: prod.id,
+          type: prod.type, 
+          name: prod.name,
+          quantity: prod.quantity,
+          price: prod.price
+        }];
+
+      // let eventObj = {
+      //   one: [{
+      //     selector: `.${this.cancelBtnObj[type].className}`,
+      //     eventName: 'click',
+      //     funName: () => this[this.cancelBtnObj[type].funName]('cancel', type)
+      //   }],
+      //   all: []}
+
+      new Templater(this.templatePath.productCard, arrOfData, this.productListDOM, undefined, true);
     });
   }
 }

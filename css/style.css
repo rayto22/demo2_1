@@ -1,6 +1,6 @@
 .product_div{
   margin: 20px;
-  height: 200px;
+  height: 280px;
   width: 160px;
   font-size: 80%;
 }
@@ -8,10 +8,10 @@
   margin: 0 auto;
   height: 140px;
   width: 140px;
+  margin-bottom: 0px !important;
 }
 .prod_name_div{
-  overflow: hidden;
-  max-height: 40px;
+  margin: 10px 0px 10px 0px;
 }
 .center{
   display: flex;
@@ -26,4 +26,7 @@
   flex-wrap: wrap;
   min-height: 50vh;
   padding-bottom: 40px;
+}
+.cancel_btn{
+  padding-left: 5px;
 }

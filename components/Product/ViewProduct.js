@@ -3,7 +3,7 @@ import { Templater} from '../Templater/Templater.js';
 class ViewProduct{
   constructor(contr) {
     this.controller = contr;
-    this.productListDOM = document.querySelector('.productList');
+    this.productListDOM = document.querySelector('.product_list');
 
     this.templatePath = {
       productCard: '/components/Product/productCardTemplate.html'

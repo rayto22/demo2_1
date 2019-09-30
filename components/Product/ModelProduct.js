@@ -8,7 +8,6 @@ class ModelProduct{
 
     return fetch('/data/products.json').then(answ => answ.json())
       .then((d) => {
-        console.log(d);
         localStorage.setItem('productList', JSON.stringify(d));
         this.controller.buildProductList();
       });

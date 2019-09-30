@@ -21,7 +21,7 @@
 .header{
   margin-top: 10px;
 }
-.productList{
+.product_list{
   display: flex;
   flex-wrap: wrap;
   min-height: 50vh;
@@ -29,4 +29,8 @@
 }
 .cancel_btn{
   padding-left: 5px;
+}
+.sort_buttons_div{
+  display: flex;
+  justify-content: flex-end;
 }

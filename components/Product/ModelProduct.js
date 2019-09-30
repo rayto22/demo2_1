@@ -1,8 +1,6 @@
 class ModelProduct{
   constructor(contr) {
     this.controller = contr;
-
-    this.initProductList();
   }
 
   initProductList() {

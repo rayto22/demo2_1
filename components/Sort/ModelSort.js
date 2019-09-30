@@ -3,8 +3,6 @@ class ModelSort{
     this.controller = contr;
 
     window.addEventListener('unload', () => this.saveSortStatus());
-
-    this.initSortStatus();
   }
 
   initSortStatus() {

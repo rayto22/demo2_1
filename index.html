@@ -107,62 +107,72 @@
           <h5 class="is-size-5">Filters</h5>
           <hr></hr>
 
-          <div>
-            <label for="priceRange">Range Price</label>
-            <input id="priceRange" class="slider has-output is-fullwidth" min="1" max="100" value="1" step="1" type="range">
-            <output for="priceRange">50</output>
+          <label>Price</label>
+          <div class="columns">
+            <div class="column">
+              <input class="input is-small filter_price_min" type="text" placeholder="min" value="0" data-filter-name="price" data-filter-range="min">
+            </div>
+            <div class="column">
+              <input class="input is-small filter_price_max" type="text" placeholder="max" data-filter-name="price" data-filter-range="max">
+            </div>
           </div>
 
-          <div>
-            <label for="quantityRange">Range Quantity</label>
-            <input id="quantityRange" class="slider has-output is-fullwidth" min="1" max="100" value="1" step="1" type="range">
-            <output for="quantityRange">50</output>
-          </div>
-
-        </form>
-
-        <form class="box">
-
-          <h5>Additional filters</h5>
-
-          <hr></hr>
-          <h6>Property choise 1</h6>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Some property 1
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Some property 2
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Some property 3
-            </label>
-          </div>
-
-          <hr></hr>
-          <h6>Property choise 2</h6>
-
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-            <label class="form-check-label" for="exampleRadios1">
-              Some property 1
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-            <label class="form-check-label" for="exampleRadios2">
-              Some property 2
-            </label>
+          <label>Quantity</label>
+          <div class="columns">
+            <div class="column">
+              <input class="input is-small filter_quantity_min" type="text" placeholder="min" value="0" data-filter-name="quantity" data-filter-range="min">
+            </div>
+            <div class="column">
+              <input class="input is-small filter_quantity_max" type="text" placeholder="max" data-filter-name="quantity" data-filter-range="max">
+            </div>
           </div>
 
         </form>
+
+        <div class="additional_filter">
+          <div class="box">
+
+            <h5>Additional filters</h5>
+            <hr></hr>
+
+            <h6>Property choise 1</h6>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+              <label class="form-check-label" for="defaultCheck1">
+                Some property 1
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+              <label class="form-check-label" for="defaultCheck1">
+                Some property 2
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+              <label class="form-check-label" for="defaultCheck1">
+                Some property 3
+              </label>
+            </div>
+
+            <hr></hr>
+            <h6>Property choise 2</h6>
+
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+              <label class="form-check-label" for="exampleRadios1">
+                Some property 1
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+              <label class="form-check-label" for="exampleRadios2">
+                Some property 2
+              </label>
+            </div>
+
+          </div>
+        </div>
       </aside>
 
 <!-- -------------------------------------------------------------------------------------------------- -->
@@ -182,9 +192,9 @@
 <!-- -------------------------------------------------------------------------------------------------- -->
           <!-- <div class="column sort" style="cursor: pointer" data-sort-name="name">A-Z</div> -->
           <div class="column">
-            <a class="button sort" style="cursor: pointer" data-sort-name="name">A-Z<span class="sort_icon"></span></a>
-            <a class="button sort" style="cursor: pointer" data-sort-name="price">Price<span class="sort_icon"></span></a>
-            <a class="button sort" style="cursor: pointer" data-sort-name="quantity">Quantity<span class="sort_icon"></span></a>
+            <a class="button sort" data-sort-name="name">A-Z<span class="sort_icon"></span></a>
+            <a class="button sort" data-sort-name="price">Price<span class="sort_icon"></span></a>
+            <a class="button sort" data-sort-name="quantity">Quantity<span class="sort_icon"></span></a>
           </div>
 
         </div>

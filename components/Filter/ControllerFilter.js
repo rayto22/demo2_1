@@ -7,7 +7,10 @@ class ControllerFilter{
     this.mainController = mainContr;
     this.model = new ModelFilter(this);
     this.view = new ViewFilter(this);
+
+    this.model.initFilterStatus();
   }
+
 
   filterProductList() {
     return this.model.filterProductList();
@@ -21,8 +24,12 @@ class ControllerFilter{
     return this.view.getSearchValue();
   }
 
-  setFilterStatus(name, state) {
-    this.model.setFilterStatus(name, state);
+  setSearchValue(value) {
+    this.view.setSearchValue(value);
+  }
+
+  setFilterProperty(filterName, property, val) {
+    this.model.setFilterProperty(filterName, property, val);
   }
 
   clearCancelButtonsDiv() {

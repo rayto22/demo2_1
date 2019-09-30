@@ -15,7 +15,7 @@ class ViewProduct{
             <div>Image</div>
           </div>
           <div class="center prod_name_div">${prod.type} ${prod.name} ${prod.color.join('/')}</div>
-          <div class="has-text-right">${prod.price} $</div>
+          <div class="has-text-right">Quantity: ${prod.quantity} || ${prod.price} $</div>
         <div>
       </div>`
     });

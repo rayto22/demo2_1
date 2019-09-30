@@ -3,8 +3,6 @@ class ModelFilter{
     this.controller = contr;
 
     window.addEventListener('unload', () => this.saveFilterStatus());
-
-    this.initFilterStatus();
   }
 
   initFilterStatus() {
@@ -20,21 +18,38 @@ class ModelFilter{
           name: {
             type: 'name',
             status: 'cancel',
-            funName: 'filterByName'
+            funName: 'filterByName',
+            lastValue: ''
+          },
+          price: {
+            type: 'price',
+            status: 'cancel',
+            funName: 'filterByMinMax',
+            min: 0,
+            max: Infinity
+          },
+          quantity: {
+            type: 'quantity',
+            status: 'cancel',
+            funName: 'filterByMinMax',
+            min: 0,
+            max: Infinity
           }
         }
       ));
     }
     this.filterStatus = JSON.parse(localStorage.getItem('filterStatus'));
-
+    this.controller.setSearchValue(this.filterStatus.name.lastValue);
   }
 
-  setFilterStatus(filterName, state){
+  setFilterProperty(filterName, property, val){
     console.log(this.filterStatus);
-    this.filterStatus[filterName].status = state;
+    this.filterStatus[filterName][property] = val;
+    console.log(this.filterStatus);
   }
 
   saveFilterStatus(){
+    this.filterStatus.name.lastValue = this.controller.getSearchValue();
     localStorage.setItem('filterStatus', JSON.stringify(this.filterStatus));
   }
 
@@ -44,7 +59,7 @@ class ModelFilter{
 
     Object.values(this.filterStatus).forEach((filter) => {
       if(filter.status !== 'cancel'){
-        prodArr = this[filter.funName](prodArr);
+        prodArr = this[filter.funName](prodArr, filter);
         this.controller.renderCancelButton(filter.type);
       }
     });
@@ -63,6 +78,13 @@ class ModelFilter{
     const categName = this.filterStatus.category.status;
     return prodArr.filter((prodObj) => {
       return prodObj.type.toLowerCase() === categName;
+    })
+  }
+
+  filterByMinMax(prodArr, filterData){
+    const filterType = filterData.type;
+    return prodArr.filter((prodObj) => {
+        return prodObj[filterType] >= filterData.min && prodObj[filterType] <= filterData.max;
     })
   }
 }

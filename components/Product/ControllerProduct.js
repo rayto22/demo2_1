@@ -6,6 +6,8 @@ class ControllerProduct{
     this.mainController = mainContr;
     this.model = new ModelProduct(this);
     this.view = new ViewProduct(this);
+
+    this.model.initProductList();
   }
 
   buildProductList(prodArr) {

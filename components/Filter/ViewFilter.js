@@ -1,4 +1,4 @@
-import { Templater} from '../../Templater/Templater.js';
+import { Templater} from '../Templater/Templater.js';
 
 class ViewFilter{
   constructor(contr) {
@@ -51,8 +51,8 @@ class ViewFilter{
     };
 
     this.templatePath = {
-      categories: '/components/Filter/categoriesTemplate.html',
-      cancelButton: '/components/Filter/cancelButtonTemplate.html'
+      categories: '../components/Filter/categoriesTemplate.html',
+      cancelButton: '../components/Filter/cancelButtonTemplate.html'
     };
 
     this.hangEvents();

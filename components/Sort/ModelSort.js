@@ -6,7 +6,7 @@ class ModelSort{
   }
 
   initSortStatus() {
-    // localStorage.removeItem('sortStatus');
+    localStorage.removeItem('sortStatus');
     if(Boolean(localStorage.getItem('sortStatus')) === false){
       localStorage.setItem('sortStatus', JSON.stringify(
         {

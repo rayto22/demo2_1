@@ -6,7 +6,7 @@ class ModelFilter{
   }
 
   initFilterStatus() {
-    // localStorage.removeItem('filterStatus');
+    localStorage.removeItem('filterStatus');
     if(Boolean(localStorage.getItem('filterStatus')) === false){
       localStorage.setItem('filterStatus', JSON.stringify(
         {

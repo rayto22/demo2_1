@@ -1,4 +1,4 @@
-import { Templater} from '../Templater/Templater.js';
+import { Templater} from '../../Templater/Templater.js';
 
 class ViewFilter{
   constructor(contr) {

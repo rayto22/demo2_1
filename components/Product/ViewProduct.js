@@ -6,7 +6,7 @@ class ViewProduct{
     this.productListDOM = document.querySelector('.product_list');
 
     this.templatePath = {
-      productCard: '/components/Product/productCardTemplate.html'
+      productCard: '/demo2_1/components/Product/productCardTemplate.html'
     };
 
   }

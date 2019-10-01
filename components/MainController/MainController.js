@@ -1,6 +1,7 @@
 import { ControllerProduct } from '../Product/ControllerProduct.js';
 import { ControllerFilter } from '../Filter/ControllerFilter.js';
 import { ControllerSort } from '../Sort/ControllerSort.js';
+import { ControllerBasket } from '../Basket/ControllerBasket.js';
 
 
 class MainController {
@@ -13,6 +14,7 @@ class MainController {
     this.filter = new ControllerFilter(this);
     this.sort = new ControllerSort(this);
     this.product = new ControllerProduct(this);
+    this.basket = new ControllerBasket(this);
 
     this.initPage();
 

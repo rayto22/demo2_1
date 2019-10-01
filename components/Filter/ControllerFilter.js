@@ -7,7 +7,9 @@ class ControllerFilter{
     this.mainController = mainContr;
     this.model = new ModelFilter(this);
     this.view = new ViewFilter(this);
+  }
 
+  initFilterStatus() {
     this.model.initFilterStatus();
   }
 

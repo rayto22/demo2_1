@@ -20,8 +20,11 @@ class MainController {
   }
 
   initPage() {
-    this.product.getProductList().then(
-      
+    this.product.getProductList().then(() => {
+      this.filter.initFilterStatus();
+      this.sort.initSortStatus();
+      this.buildProductList();
+    }
     );
   }
 

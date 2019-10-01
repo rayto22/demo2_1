@@ -7,7 +7,9 @@ class ControllerSort{
     this.mainController = mainContr;
     this.model = new ModelSort(this);
     this.view = new ViewSort(this);
-
+  }
+  
+  initSortStatus() {
     this.model.initSortStatus();
   }
 

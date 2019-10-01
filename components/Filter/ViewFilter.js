@@ -51,8 +51,8 @@ class ViewFilter{
     };
 
     this.templatePath = {
-      categories: '../components/Filter/categoriesTemplate.html',
-      cancelButton: '../components/Filter/cancelButtonTemplate.html'
+      categories: '/demo2_1/components/Filter/categoriesTemplate.html',
+      cancelButton: '/demo2_1/components/Filter/cancelButtonTemplate.html'
     };
 
     this.hangEvents();

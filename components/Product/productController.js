@@ -1,11 +1,11 @@
-import { ModelProduct } from '../Product/ModelProduct.js';
-import { ViewProduct } from '../Product/ViewProduct.js';
+import { ProductModel } from '../product/productModel.js';
+import { ProductView } from '../product/productView.js';
 
-class ControllerProduct{
+class ProductController{
   constructor(mainContr) {
     this.mainController = mainContr;
-    this.model = new ModelProduct(this);
-    this.view = new ViewProduct(this);
+    this.model = new ProductModel(this);
+    this.view = new ProductView(this);
   }
 
   buildProductList() {
@@ -21,4 +21,4 @@ class ControllerProduct{
   }
 }
 
-export { ControllerProduct }
+export { ProductController }

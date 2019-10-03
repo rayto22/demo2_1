@@ -1,4 +1,4 @@
-class ModelProduct{
+class ProductModel{
   constructor(contr) {
     this.controller = contr;
   }
@@ -6,7 +6,7 @@ class ModelProduct{
   getProductList() {
     localStorage.removeItem('productList');
 
-    return fetch('/demo2_1/data/products.json').then(answ => answ.json())
+    return fetch('/data/products.json').then(answ => answ.json())
       .then((d) => {
         localStorage.setItem('productList', JSON.stringify(d));
       });
@@ -15,4 +15,4 @@ class ModelProduct{
 
 }
 
-export { ModelProduct };
+export { ProductModel };

@@ -1,12 +1,12 @@
-import { ModelFilter } from '../Filter/ModelFilter.js';
-import { ViewFilter } from '../Filter/ViewFilter.js';
+import { FilterModel } from '../filter/filterModel.js';
+import { FilterView } from '../filter/filterView.js';
 
 
-class ControllerFilter{
+class FilterController{
   constructor(mainContr) {
     this.mainController = mainContr;
-    this.model = new ModelFilter(this);
-    this.view = new ViewFilter(this);
+    this.model = new FilterModel(this);
+    this.view = new FilterView(this);
   }
 
   initFilterStatus() {
@@ -46,4 +46,4 @@ class ControllerFilter{
   }
 }
 
-export { ControllerFilter }
+export { FilterController }

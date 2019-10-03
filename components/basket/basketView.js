@@ -1,7 +1,7 @@
-class ViewBasket{
+class BasketView{
   constructor(contr) {
     this.controller = contr;
   }
 }
 
-export { ViewBasket };
+export { BasketView };

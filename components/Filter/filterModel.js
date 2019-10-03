@@ -1,4 +1,4 @@
-class ModelFilter{
+class FilterModel{
   constructor(contr) {
     this.controller = contr;
 
@@ -94,4 +94,4 @@ class ModelFilter{
   }
 }
 
-export { ModelFilter };
+export { FilterModel };

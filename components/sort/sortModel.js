@@ -1,4 +1,4 @@
-class ModelSort{
+class SortModel{
   constructor(contr) {
     this.controller = contr;
 
@@ -6,7 +6,7 @@ class ModelSort{
   }
 
   initSortStatus() {
-    // localStorage.removeItem('sortStatus');
+    localStorage.removeItem('sortStatus');
     if(Boolean(localStorage.getItem('sortStatus')) === false){
       localStorage.setItem('sortStatus', JSON.stringify(
         {
@@ -62,4 +62,4 @@ class ModelSort{
   }
 }
 
-export { ModelSort };
+export { SortModel };

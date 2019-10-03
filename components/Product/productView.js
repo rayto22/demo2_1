@@ -1,14 +1,11 @@
-import { Templater} from '../Templater/Templater.js';
+import { Templater } from '../templater/templater.js';
 
-class ViewProduct{
+class ProductView{
   constructor(contr) {
     this.controller = contr;
+    this.templater = new Templater;
+
     this.productListDOM = document.querySelector('.product_list');
-
-    this.templatePath = {
-      productCard: '/demo2_1/components/Product/productCardTemplate.html'
-    };
-
   }
 
   renderProductList(prodArr) {
@@ -37,9 +34,9 @@ class ViewProduct{
       //   }],
       //   all: []}
 
-      new Templater(this.templatePath.productCard, arrOfData, this.productListDOM, undefined, true);
+      this.templater.initTemplate('productCardTemplate', arrOfData, this.productListDOM, undefined, true);
     });
   }
 }
 
-export { ViewProduct };
+export { ProductView };

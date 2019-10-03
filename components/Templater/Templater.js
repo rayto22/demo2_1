@@ -1,7 +1,26 @@
 class Templater{
-  constructor(link, arrOfData, dom, eventObj, containerFlag){
+  constructor(){
+    if (!!Templater.instance) {
+      return Templater.instance;
+    }
+    Templater.instance = this;
 
-    fetch(link).then(l=>l.text())
+    this.eventsStorage = {};
+
+    this.templatePathColl = {
+      'cancelBtnTemplate': '/components/filter/cancelButtonTemplate.html',
+      'categoryTemplate': '/components/filter/categoryTemplate.html',
+
+      'sortBtnTemplate': '/components/sort/sortBtnTemplate.html',
+
+      'productCardTemplate': '/components/product/productCardTemplate.html'
+    };
+
+    return this;
+  }
+
+  initTemplate(templName, arrOfData, dom, eventObj, containerFlag) {
+    return fetch(this.templatePathColl[templName]).then(l=>l.text())
     .then(t=>{
       this.template = t;
       this.render(arrOfData, dom, containerFlag);
@@ -11,9 +30,12 @@ class Templater{
     });
   }
 
+  clearContainer(dom) {
+    dom.innerHTML = '';
+  }
+
   render(arrOfData, dom, containerFlag) {
     let answ = this.template;
-
 
     const result = arrOfData.reduce((str, obj) => {
       return str + Object.entries(obj).reduce((domEl, keyValueArr) => {
@@ -33,9 +55,20 @@ class Templater{
   }
 
   hangEvents(eventObj) {
-    eventObj.one.forEach(ev => {
-      console.log(document.querySelector(ev.selector));
-      document.querySelector(ev.selector).addEventListener(ev.eventName, ev.funName);
+
+    if(Boolean(this.eventsStorage[eventObj.name]) === true) {
+      this.eventsStorage[eventObj.name].forEach(el => {
+        el.domEl.removeEventListener(el.eventName, el.funName);
+      });
+      this.eventsStorage[eventObj.name].length = 0;
+    } else {
+      this.eventsStorage[eventObj.name] = [];
+    }
+
+    this.eventsStorage[eventObj.name] = eventObj.one.map(ev => {
+      ev.domEl = document.querySelector(ev.selector);
+      ev.domEl.addEventListener(ev.eventName, ev.funName);
+      return ev;
     });
 
     eventObj.all.forEach(ev => {

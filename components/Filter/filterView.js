@@ -1,8 +1,9 @@
-import { Templater} from '../Templater/Templater.js';
+import { Templater } from '../templater/templater.js';
 
-class ViewFilter{
+class FilterView{
   constructor(contr) {
     this.controller = contr;
+    this.templater = new Templater;
 
     this.cancelBtnObj = {
       category: {
@@ -27,7 +28,7 @@ class ViewFilter{
       }
     };
 
-    this.DOMStorage = {
+    this.domStorage = {
       name: {
         inputDOM: document.querySelector('.search_input')
       },
@@ -50,29 +51,24 @@ class ViewFilter{
       } 
     };
 
-    this.templatePath = {
-      categories: '/demo2_1/components/Filter/categoriesTemplate.html',
-      cancelButton: '/demo2_1/components/Filter/cancelButtonTemplate.html'
-    };
-
     this.hangEvents();
   }
 
   hangEvents(){
-    this.DOMStorage.name.inputDOM.addEventListener('keyup', () => this.initFilterByName());
+    this.domStorage.name.inputDOM.addEventListener('keyup', () => this.initFilterByName());
 
-    this.DOMStorage.price.minInputDOM.addEventListener('keyup', () => this.initFilterByPriceAndQuantity(undefined, 'price'));
-    this.DOMStorage.price.maxInputDOM.addEventListener('keyup', () => this.initFilterByPriceAndQuantity(undefined, 'price'));
+    this.domStorage.price.minInputDOM.addEventListener('keyup', () => this.initFilterByPriceAndQuantity(undefined, 'price'));
+    this.domStorage.price.maxInputDOM.addEventListener('keyup', () => this.initFilterByPriceAndQuantity(undefined, 'price'));
 
-    this.DOMStorage.quantity.minInputDOM.addEventListener('keyup', () => this.initFilterByPriceAndQuantity(undefined, 'quantity'));
-    this.DOMStorage.quantity.maxInputDOM.addEventListener('keyup', () => this.initFilterByPriceAndQuantity(undefined, 'quantity'));
+    this.domStorage.quantity.minInputDOM.addEventListener('keyup', () => this.initFilterByPriceAndQuantity(undefined, 'quantity'));
+    this.domStorage.quantity.maxInputDOM.addEventListener('keyup', () => this.initFilterByPriceAndQuantity(undefined, 'quantity'));
   }
 
   initFilterByName(arg) {
-    if(this.DOMStorage.name.inputDOM.value !== '' && arg !== 'cancel'){
+    if(this.domStorage.name.inputDOM.value !== '' && arg !== 'cancel'){
       this.controller.setFilterProperty('name', 'status', true);
     } else {
-      this.DOMStorage.name.inputDOM.value = '';
+      this.domStorage.name.inputDOM.value = '';
       this.controller.setFilterProperty('name', 'status', 'cancel');
     }
     this.controller.rebuildProductList();
@@ -87,18 +83,18 @@ class ViewFilter{
   initFilterByPriceAndQuantity(arg, type) {
     if(arg === 'cancel'){
       this.controller.setFilterProperty(type, 'status', 'cancel');
-      this.DOMStorage[type].minInputDOM.value = "0";
-      this.DOMStorage[type].maxInputDOM.value = "";
+      this.domStorage[type].minInputDOM.value = "0";
+      this.domStorage[type].maxInputDOM.value = "";
     } else {
       this.controller.setFilterProperty(type, 'status', true);
-      this.controller.setFilterProperty(type, 'min', Number(this.DOMStorage[type].minInputDOM.value.replace(/\D/g, '')) || 0);
-      this.controller.setFilterProperty(type, 'max', Number(this.DOMStorage[type].maxInputDOM.value.replace(/\D/g, '')) || Infinity);
+      this.controller.setFilterProperty(type, 'min', Number(this.domStorage[type].minInputDOM.value.replace(/\D/g, '')) || 0);
+      this.controller.setFilterProperty(type, 'max', Number(this.domStorage[type].maxInputDOM.value.replace(/\D/g, '')) || Infinity);
     }
     this.controller.rebuildProductList();
   }
 
   clearCancelButtonsDiv() {
-    this.DOMStorage.cancelFilter.divDOM.innerHTML = "";
+    this.domStorage.cancelFilter.divDOM.innerHTML = "";
   }
 
   renderCancelButton(type) {
@@ -109,6 +105,7 @@ class ViewFilter{
       }];
 
     let eventObj = {
+      name: 'cancelButtonFilter',
       one: [{
         selector: `.${this.cancelBtnObj[type].className}`,
         eventName: 'click',
@@ -116,7 +113,7 @@ class ViewFilter{
       }],
       all: []}
 
-    new Templater(this.templatePath.cancelButton, arrOfData, this.DOMStorage.cancelFilter.divDOM, eventObj, true);
+    this.templater.initTemplate('cancelBtnTemplate', arrOfData, this.domStorage.cancelFilter.divDOM, eventObj, true);
   }
 
   renderCategories(categoriesList) {
@@ -125,6 +122,7 @@ class ViewFilter{
     });
 
     let eventObj = {
+      name: 'category',
       one: [...categoriesList].map((categ) => {
         return {
           selector: `.nav_category[data-categ-name='${categ}']`,
@@ -134,43 +132,43 @@ class ViewFilter{
       all: []
     };
 
-    new Templater(this.templatePath.categories, arrOfData, this.DOMStorage.category.divDOM, eventObj);
+    this.templater.initTemplate('categoryTemplate', arrOfData, this.domStorage.category.divDOM, eventObj);
   }
 
   renderAdditionalFilter(categName) {
     
     switch (categName) {
       case 'cancel': {
-        this.DOMStorage.additionalFilter.divDOM.innerHTML = '';
+        this.domStorage.additionalFilter.divDOM.innerHTML = '';
         break;
       }
       case 'cat': {
-        this.DOMStorage.additionalFilter.divDOM.innerHTML = 'cat'
+        this.domStorage.additionalFilter.divDOM.innerHTML = 'cat'
         break;
       }
       case 'dog': {
-        this.DOMStorage.additionalFilter.divDOM.innerHTML = 'dog';
+        this.domStorage.additionalFilter.divDOM.innerHTML = 'dog';
         break;
       }
       case 'bird': {
-        this.DOMStorage.additionalFilter.divDOM.innerHTML = 'bird';
+        this.domStorage.additionalFilter.divDOM.innerHTML = 'bird';
         break;
       }
       case 'fish': {
-        this.DOMStorage.additionalFilter.divDOM.innerHTML = 'fish';
+        this.domStorage.additionalFilter.divDOM.innerHTML = 'fish';
         break;
       }     
     }
   }
 
   getSearchValue() {
-    return this.DOMStorage.name.inputDOM.value;
+    return this.domStorage.name.inputDOM.value;
   }
 
   setSearchValue(val) {
-    this.DOMStorage.name.inputDOM.value = val;
+    this.domStorage.name.inputDOM.value = val;
   }
 
 }
 
-export { ViewFilter };
+export { FilterView };

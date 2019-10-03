@@ -1,3 +1,3 @@
-import { MainController } from '../components/MainController/MainController.js';
+import { Mediator } from '../components/mediator/mediator.js';
 
-const MainC = new MainController();
+const med = new Mediator();

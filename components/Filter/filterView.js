@@ -19,12 +19,12 @@ class FilterView{
       price: {
         btnName: 'Price',
         className: 'price_filter_cancel',
-        funName: 'initFilterByPriceAndQuantity'
+        funName: 'initFilterByPriceOrQuantity'
       },
       quantity: {
         btnName: 'Quantity',
         className: 'quantity_filter_cancel',
-        funName: 'initFilterByPriceAndQuantity'
+        funName: 'initFilterByPriceOrQuantity'
       }
     };
 
@@ -55,46 +55,18 @@ class FilterView{
   }
 
   hangEvents(){
-    this.domStorage.name.inputDOM.addEventListener('keyup', () => this.initFilterByName());
-
-    this.domStorage.price.minInputDOM.addEventListener('keyup', () => this.initFilterByPriceAndQuantity(undefined, 'price'));
-    this.domStorage.price.maxInputDOM.addEventListener('keyup', () => this.initFilterByPriceAndQuantity(undefined, 'price'));
-
-    this.domStorage.quantity.minInputDOM.addEventListener('keyup', () => this.initFilterByPriceAndQuantity(undefined, 'quantity'));
-    this.domStorage.quantity.maxInputDOM.addEventListener('keyup', () => this.initFilterByPriceAndQuantity(undefined, 'quantity'));
-  }
-
-  initFilterByName(arg) {
-    if(this.domStorage.name.inputDOM.value !== '' && arg !== 'cancel'){
-      this.controller.setFilterProperty('name', 'status', true);
-    } else {
-      this.domStorage.name.inputDOM.value = '';
-      this.controller.setFilterProperty('name', 'status', 'cancel');
-    }
-    this.controller.rebuildProductList();
-  }
-
-  initFilterByCateg(categName) {
-    this.controller.setFilterProperty('category', 'status', categName);
-    this.renderAdditionalFilter(categName);
-    this.controller.rebuildProductList();
-  }
-
-  initFilterByPriceAndQuantity(arg, type) {
-    if(arg === 'cancel'){
-      this.controller.setFilterProperty(type, 'status', 'cancel');
-      this.domStorage[type].minInputDOM.value = "0";
-      this.domStorage[type].maxInputDOM.value = "";
-    } else {
-      this.controller.setFilterProperty(type, 'status', true);
-      this.controller.setFilterProperty(type, 'min', Number(this.domStorage[type].minInputDOM.value.replace(/\D/g, '')) || 0);
-      this.controller.setFilterProperty(type, 'max', Number(this.domStorage[type].maxInputDOM.value.replace(/\D/g, '')) || Infinity);
-    }
-    this.controller.rebuildProductList();
+    // Search
+    this.domStorage.name.inputDOM.addEventListener('keyup', () => this.controller.initFilterByName());
+    // Price
+    this.domStorage.price.minInputDOM.addEventListener('keyup', () => this.controller.initFilterByPriceOrQuantity(undefined, 'price'));
+    this.domStorage.price.maxInputDOM.addEventListener('keyup', () => this.controller.initFilterByPriceOrQuantity(undefined, 'price'));
+    // Quantity
+    this.domStorage.quantity.minInputDOM.addEventListener('keyup', () => this.controller.initFilterByPriceOrQuantity(undefined, 'quantity'));
+    this.domStorage.quantity.maxInputDOM.addEventListener('keyup', () => this.controller.initFilterByPriceOrQuantity(undefined, 'quantity'));
   }
 
   clearCancelButtonsDiv() {
-    this.domStorage.cancelFilter.divDOM.innerHTML = "";
+    this.templater.resetContainer(this.domStorage.cancelFilter.divDOM, 'cancelButtonFilter');
   }
 
   renderCancelButton(type) {
@@ -109,7 +81,7 @@ class FilterView{
       one: [{
         selector: `.${this.cancelBtnObj[type].className}`,
         eventName: 'click',
-        funName: () => this[this.cancelBtnObj[type].funName]('cancel', type)
+        funName: () => this.controller[this.cancelBtnObj[type].funName]('cancel', type)
       }],
       all: []}
 
@@ -127,7 +99,7 @@ class FilterView{
         return {
           selector: `.nav_category[data-categ-name='${categ}']`,
           eventName: 'click',
-          funName: () => this.initFilterByCateg(categ)
+          funName: () => this.controller.initFilterByCateg(categ)
         }}),
       all: []
     };
@@ -165,8 +137,20 @@ class FilterView{
     return this.domStorage.name.inputDOM.value;
   }
 
+  getPriceOrQuantityMinMaxValue(type) {
+    return {
+      min: this.domStorage[type].minInputDOM.value,
+      max: this.domStorage[type].maxInputDOM.value,
+    }
+  }
+
   setSearchValue(val) {
     this.domStorage.name.inputDOM.value = val;
+  }
+
+  setPriceOrQuantityValue(type, min, max){
+    this.domStorage[type].minInputDOM.value = min;
+    this.domStorage[type].maxInputDOM.value = max;
   }
 
 }

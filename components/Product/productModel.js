@@ -4,15 +4,13 @@ class ProductModel{
   }
 
   getProductList() {
-    localStorage.removeItem('productList');
+    // localStorage.removeItem('productList');
 
     return fetch('/data/products.json').then(answ => answ.json())
       .then((d) => {
         localStorage.setItem('productList', JSON.stringify(d));
       });
   }
-
-
 }
 
 export { ProductModel };

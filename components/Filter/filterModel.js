@@ -26,22 +26,23 @@ class FilterModel{
             status: 'cancel',
             funName: 'filterByMinMax',
             min: 0,
-            max: Infinity
+            max: Infinity,
+            minLastValue: '0',
+            maxLastValue: ''
           },
           quantity: {
             type: 'quantity',
             status: 'cancel',
             funName: 'filterByMinMax',
             min: 0,
-            max: Infinity
+            max: Infinity,
+            minLastValue: '0',
+            maxLastValue: ''
           }
         }
       ));
     }
     this.filterStatus = JSON.parse(localStorage.getItem('filterStatus'));
-    this.controller.setSearchValue(this.filterStatus.name.lastValue);
-    
-    this.controller.renderCategories(this.getCategoriesList());
   }
 
   getCategoriesList() {
@@ -49,26 +50,26 @@ class FilterModel{
   }
 
   setFilterProperty(filterName, property, val){
-    console.log(this.filterStatus);
     this.filterStatus[filterName][property] = val;
-    console.log(this.filterStatus);
   }
 
   saveFilterStatus(){
     this.filterStatus.name.lastValue = this.controller.getSearchValue();
+    this.filterStatus.price.minLastValue = this.filterStatus.price.min;
+    this.filterStatus.price.maxLastValue = this.filterStatus.price.max !== Infinity ? this.filterStatus.price.max : '';
+    this.filterStatus.quantity.minLastValue = this.filterStatus.quantity.min;
+    this.filterStatus.quantity.maxLastValue = this.filterStatus.quantity.max !== Infinity ? this.filterStatus.quantity.max : '';
+    
     localStorage.setItem('filterStatus', JSON.stringify(this.filterStatus));
   }
 
   filterProductList(prodArr){
-    this.controller.clearCancelButtonsDiv();
-
     Object.values(this.filterStatus).forEach((filter) => {
       if(filter.status !== 'cancel'){
         prodArr = this[filter.funName](prodArr, filter);
         this.controller.renderCancelButton(filter.type);
       }
     });
-
     return prodArr;
   }
 

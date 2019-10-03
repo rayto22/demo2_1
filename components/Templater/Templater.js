@@ -4,9 +4,7 @@ class Templater{
       return Templater.instance;
     }
     Templater.instance = this;
-
     this.eventsStorage = {};
-
     this.templatePathColl = {
       'cancelBtnTemplate': '/components/filter/cancelButtonTemplate.html',
       'categoryTemplate': '/components/filter/categoryTemplate.html',
@@ -30,7 +28,13 @@ class Templater{
     });
   }
 
-  clearContainer(dom) {
+  resetContainer(dom, name) {
+    if(Boolean(this.eventsStorage[name]) === true) {
+      this.eventsStorage[name].forEach(el => {
+        el.domEl.removeEventListener(el.eventName, el.funName);
+      });
+      this.eventsStorage[name].length = 0;
+    } 
     dom.innerHTML = '';
   }
 
@@ -51,19 +55,9 @@ class Templater{
     } else {
       dom.innerHTML += result;
     }
-    
   }
 
   hangEvents(eventObj) {
-
-    if(Boolean(this.eventsStorage[eventObj.name]) === true) {
-      this.eventsStorage[eventObj.name].forEach(el => {
-        el.domEl.removeEventListener(el.eventName, el.funName);
-      });
-      this.eventsStorage[eventObj.name].length = 0;
-    } else {
-      this.eventsStorage[eventObj.name] = [];
-    }
 
     this.eventsStorage[eventObj.name] = eventObj.one.map(ev => {
       ev.domEl = document.querySelector(ev.selector);

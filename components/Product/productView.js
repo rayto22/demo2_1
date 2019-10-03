@@ -5,11 +5,19 @@ class ProductView{
     this.controller = contr;
     this.templater = new Templater;
 
-    this.productListDOM = document.querySelector('.product_list');
+    this.domStorage = {
+      productListContainer: {
+        divDOM: document.querySelector('.product_list')
+      }
+    }
   }
 
   renderProductList(prodArr) {
-    this.productListDOM.innerHTML = "";
+    this.templater.resetContainer(this.domStorage.productListContainer.divDOM, 'productCards');
+
+    prodArr.forEach((prod) => {
+      console.log(prod.price);
+    })
 
     prodArr.forEach(prod => {
 
@@ -34,7 +42,7 @@ class ProductView{
       //   }],
       //   all: []}
 
-      this.templater.initTemplate('productCardTemplate', arrOfData, this.productListDOM, undefined, true);
+      this.templater.initTemplate('productCardTemplate', arrOfData, this.domStorage.productListContainer.divDOM, undefined, true);
     });
   }
 }

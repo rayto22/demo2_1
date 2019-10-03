@@ -8,7 +8,7 @@ import { BasketController } from '../basket/basketController.js';
 class Mediator {
   constructor() {
     this.eventManager = new EventManager();
-    this.filter = new FilterController(this.eventManagers);
+    this.filter = new FilterController(this.eventManager);
     this.sort = new SortController(this.eventManager);
     this.product = new ProductController(this.eventManager);
     this.basket = new BasketController(this.eventManager);
@@ -29,6 +29,7 @@ class Mediator {
     let prodArr = JSON.parse(localStorage.getItem('productList'));
     prodArr = this.filter.filterProductList(prodArr);
     this.sort.sortProductList(prodArr);
+    
     this.product.renderProductList(prodArr);
   }
 }

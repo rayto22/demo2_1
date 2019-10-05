@@ -1,8 +1,11 @@
 .product_div{
-  margin: 20px;
-  height: 280px;
-  width: 160px;
+  margin: 10px;
+  /* height: 280px;
+  width: 160px; */
+  height: 300px;
+  width: 180px;
   font-size: 80%;
+  padding-bottom: 10px;
 }
 .prod_image{
   margin: 0 auto;

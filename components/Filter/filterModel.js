@@ -5,7 +5,8 @@ class FilterModel{
 
   initFilterStatus() {
     // localStorage.removeItem('filterStatus');
-    if(Boolean(localStorage.getItem('filterStatus')) === false){
+    const filterStatus = localStorage.getItem('filterStatus');
+    if(Boolean(filterStatus) === false || filterStatus === 'undefined'){
       localStorage.setItem('filterStatus', JSON.stringify(
         {
           category: {

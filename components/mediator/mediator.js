@@ -14,6 +14,7 @@ class Mediator {
   }
 
   initPage() {
+    this.eventManager.unsubscribe('All templates was loaded', this.initPage.bind(this));
     this.filter = new FilterController(this.eventManager);
     this.sort = new SortController(this.eventManager);
     this.product = new ProductController(this.eventManager);

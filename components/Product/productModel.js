@@ -1,6 +1,6 @@
 class ProductModel{
-  constructor(contr) {
-    this.controller = contr;
+  constructor(eventManager) {
+    this.eventManager = eventManager;
   }
 
   getProductList() {
@@ -32,6 +32,7 @@ class ProductModel{
           }
         });
         localStorage.setItem('productList', JSON.stringify(d));
+        this.eventManager.publish('Products were received', d);
       });
   }
 }

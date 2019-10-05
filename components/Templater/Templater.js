@@ -20,7 +20,8 @@ class Templater{
       // Sort
       'sortBtnTemplate': '/components/sort/sortBtnTemplate.html',
       // Products
-      'productCardTemplate': '/components/product/productCardTemplate.html'
+      'productCardTemplate': '/components/productCard/productCardTemplate.html',
+      'productCardInfoModalTemplate': '/components/productCard/productCardInfoModalTemplate.html'
     };
     this.templatesQuantity = Object.keys(this.templatePathColl).length;
     this.templatesQuantityLoaded = 0;
@@ -46,6 +47,7 @@ class Templater{
   checkFullLoadStatus() {
     this.templatesQuantityLoaded += 1;
     if(this.templatesQuantityLoaded === this.templatesQuantity){
+      this.eventManager.unsubscribe('One template was loaded', this.checkFullLoadStatus.bind(this));
       this.eventManager.publish('All templates was loaded');
     }
   }
@@ -63,8 +65,20 @@ class Templater{
         el.domEl.removeEventListener(el.eventName, el.funName);
       });
       this.eventsStorage[name].length = 0;
+    }
+    if(dom !== false){
+      dom.innerHTML = '';
+    }
+  }
+
+  removeCardFromList(selector, name) {
+    if(Boolean(this.eventsStorage[name]) === true) {
+      this.eventsStorage[name].forEach(el => {
+        el.domEl.removeEventListener(el.eventName, el.funName);
+      });
+      this.eventsStorage[name].length = 0;
     } 
-    dom.innerHTML = '';
+    document.querySelector(selector);
   }
 
   render(templName, arrOfData, dom, containerFlag) {

@@ -25,6 +25,36 @@ class FilterView{
         btnName: 'Quantity',
         className: 'quantity_filter_cancel',
         funName: 'initFilterByPriceOrQuantity'
+      },
+      color: {
+        btnName: 'Color',
+        className: 'color_add_filter_cancel',
+        funName: 'initAddFilterCheckBox'
+      },
+      gender: {
+        btnName: 'Gender',
+        className: 'gender_add_filter_cancel',
+        funName: 'initAddFilterCheckBox'
+      },
+      fur: {
+        btnName: 'Fur',
+        className: 'fur_add_filter_cancel',
+        funName: 'initAddFilterCheckBox'
+      },
+      specialization: {
+        btnName: 'Specialization',
+        className: 'specialization_add_filter_cancel',
+        funName: 'initAddFilterCheckBox'
+      },
+      features: {
+        btnName: 'features',
+        className: 'features_add_filter_cancel',
+        funName: 'initAddFilterCheckBox'
+      },
+      zonality: {
+        btnName: 'zonality',
+        className: 'zonality_add_filter_cancel',
+        funName: 'initAddFilterCheckBox'
       }
     };
 
@@ -38,15 +68,21 @@ class FilterView{
       mainFilter: {
         divDOM: document.querySelector('.main_filter')
       },
-      additionalFilter: {
-        divDOM: document.querySelector('.additional_filter')
+      additionalFilterDiv: {
+        divDOM: document.querySelector('.additional_filter'),
       },
+      additionalFilters: {},
       cancelFilter: {
         divDOM: document.querySelector('.cancel_buttuns_div')
-      } 
+      }
     };
 
     this.hangEvents();
+  }
+
+  hangEvents(){
+    window.addEventListener('unload', () => this.controller.saveFilterStatus());
+    this.domStorage.name.inputDOM.addEventListener('keyup', () => this.controller.initFilterByName());
   }
 
   clearCancelButtonsDiv() {
@@ -89,11 +125,6 @@ class FilterView{
     };
 
     this.templater.initTemplate('categoryTemplate', arrOfData, this.domStorage.category.divDOM, eventObj);
-  }
-
-  hangEvents(){
-    window.addEventListener('unload', () => this.controller.saveFilterStatus());
-    this.domStorage.name.inputDOM.addEventListener('keyup', () => this.controller.initFilterByName());
   }
 
   renderMainFilter() {
@@ -143,27 +174,196 @@ class FilterView{
 
   }
 
-  renderAdditionalFilter(categName) {
-    
+  renderAdditionalFilter(categName, propsObj) {
+    this.templater.resetContainer(this.domStorage.additionalFilterDiv.divDOM, 'addFilter1');
+    this.templater.resetContainer(this.domStorage.additionalFilterDiv.divDOM, 'addFilter2');
     switch (categName) {
-      case 'cancel': {
-        this.domStorage.additionalFilter.divDOM.innerHTML = '';
-        break;
-      }
       case 'cat': {
-        this.domStorage.additionalFilter.divDOM.innerHTML = 'cat'
+
+        const templateArrOfDataForBox = [{
+          categName: categName,
+          firstFilterName: 'Color',
+          secondFilterName: 'Gender'
+        }];
+        this.templater.initTemplate('addFilterBox', templateArrOfDataForBox, this.domStorage.additionalFilterDiv.divDOM);
+
+        const firstFilterDivDOM = this.domStorage.additionalFilterDiv.divDOM.querySelector('.firstAddFilter');
+        propsObj.color.forEach(color => {
+          const templateArrOfDataFirstFilter = [{
+            filterName: 'color',
+            type: color
+          }];
+          const templateObjOfEvents = {
+            name: 'addFilter1',
+            one: [{
+              selector: `.addFilter${templateArrOfDataFirstFilter[0].filterName}${templateArrOfDataFirstFilter[0].type}`,
+              eventName: 'click',
+              funName: () => this.controller.initAddFilterCheckBox(undefined, templateArrOfDataFirstFilter[0].filterName, templateArrOfDataFirstFilter[0].type, 'firstAddFilter')
+            }],
+            all: []};
+          this.templater.initTemplate('addFilterCheckBox', templateArrOfDataFirstFilter, firstFilterDivDOM, templateObjOfEvents, true);
+          this.domStorage.additionalFilters[`${templateArrOfDataFirstFilter[0].filterName}${templateArrOfDataFirstFilter[0].type}`] = document.querySelector(`.addFilter${templateArrOfDataFirstFilter[0].filterName}${templateArrOfDataFirstFilter[0].type}`);
+        });
+        
+        const secondFilterDivDOM = this.domStorage.additionalFilterDiv.divDOM.querySelector('.secondAddFilter');
+        propsObj.gender.forEach(gender => {
+          const templateArrOfDataSecondFilter = [{
+            filterName: 'gender',
+            type: gender
+          }];
+          const templateObjOfEvents = {
+            name: 'addFilter2',
+            one: [{
+              selector: `.addFilter${templateArrOfDataSecondFilter[0].filterName}${templateArrOfDataSecondFilter[0].type}`,
+              eventName: 'click',
+              funName: () => this.controller.initAddFilterCheckBox(undefined, templateArrOfDataSecondFilter[0].filterName, templateArrOfDataSecondFilter[0].type, 'secondAddFilter')
+            }],
+            all: []};
+          this.templater.initTemplate('addFilterCheckBox', templateArrOfDataSecondFilter, secondFilterDivDOM, templateObjOfEvents, true);
+          this.domStorage.additionalFilters[`${templateArrOfDataSecondFilter[0].filterName}${templateArrOfDataSecondFilter[0].type}`] = document.querySelector(`.addFilter${templateArrOfDataSecondFilter[0].filterName}${templateArrOfDataSecondFilter[0].type}`)
+        });
+      
         break;
       }
       case 'dog': {
-        this.domStorage.additionalFilter.divDOM.innerHTML = 'dog';
+        
+        const templateArrOfDataForBox = [{
+          categName: categName,
+          firstFilterName: 'Fur',
+          secondFilterName: 'Specialization'
+        }];
+        this.templater.initTemplate('addFilterBox', templateArrOfDataForBox, this.domStorage.additionalFilterDiv.divDOM);
+
+        const firstFilterDivDOM = this.domStorage.additionalFilterDiv.divDOM.querySelector('.firstAddFilter');
+        propsObj.fur.forEach(furValue => {
+          const templateArrOfDataFirstFilter = [{
+            filterName: 'fur',
+            type: furValue
+          }];
+          const templateObjOfEvents = {
+            name: 'addFilter1',
+            one: [{
+              selector: `.addFilter${templateArrOfDataFirstFilter[0].filterName}${templateArrOfDataFirstFilter[0].type}`,
+              eventName: 'click',
+              funName: () => this.controller.initAddFilterCheckBox(undefined, templateArrOfDataFirstFilter[0].filterName, templateArrOfDataFirstFilter[0].type, 'firstAddFilter')
+            }],
+            all: []};
+          this.templater.initTemplate('addFilterCheckBox', templateArrOfDataFirstFilter, firstFilterDivDOM, templateObjOfEvents, true);
+          this.domStorage.additionalFilters[`${templateArrOfDataFirstFilter[0].filterName}${templateArrOfDataFirstFilter[0].type}`] = document.querySelector(`.addFilter${templateArrOfDataFirstFilter[0].filterName}${templateArrOfDataFirstFilter[0].type}`);
+        });
+        
+        const secondFilterDivDOM = this.domStorage.additionalFilterDiv.divDOM.querySelector('.secondAddFilter');
+        propsObj.specialization.forEach(specializationValue => {
+          const templateArrOfDataSecondFilter = [{
+            filterName: 'specialization',
+            type: specializationValue
+          }];
+          const templateObjOfEvents = {
+            name: 'addFilter2',
+            one: [{
+              selector: `.addFilter${templateArrOfDataSecondFilter[0].filterName}${templateArrOfDataSecondFilter[0].type}`,
+              eventName: 'click',
+              funName: () => this.controller.initAddFilterCheckBox(undefined, templateArrOfDataSecondFilter[0].filterName, templateArrOfDataSecondFilter[0].type, 'secondAddFilter')
+            }],
+            all: []};
+          this.templater.initTemplate('addFilterCheckBox', templateArrOfDataSecondFilter, secondFilterDivDOM, templateObjOfEvents, true);
+          this.domStorage.additionalFilters[`${templateArrOfDataSecondFilter[0].filterName}${templateArrOfDataSecondFilter[0].type}`] = document.querySelector(`.addFilter${templateArrOfDataSecondFilter[0].filterName}${templateArrOfDataSecondFilter[0].type}`)
+        });
+
         break;
       }
       case 'bird': {
-        this.domStorage.additionalFilter.divDOM.innerHTML = 'bird';
+        
+        const templateArrOfDataForBox = [{
+          categName: categName,
+          firstFilterName: 'Features',
+          secondFilterName: 'Color'
+        }];
+        this.templater.initTemplate('addFilterBox', templateArrOfDataForBox, this.domStorage.additionalFilterDiv.divDOM);
+
+        const firstFilterDivDOM = this.domStorage.additionalFilterDiv.divDOM.querySelector('.firstAddFilter');
+        propsObj.features.forEach(feature => {
+          const templateArrOfDataFirstFilter = [{
+            filterName: 'features',
+            type: feature
+          }];
+          const templateObjOfEvents = {
+            name: 'addFilter1',
+            one: [{
+              selector: `.addFilter${templateArrOfDataFirstFilter[0].filterName}${templateArrOfDataFirstFilter[0].type}`,
+              eventName: 'click',
+              funName: () => this.controller.initAddFilterCheckBox(undefined, templateArrOfDataFirstFilter[0].filterName, templateArrOfDataFirstFilter[0].type, 'firstAddFilter')
+            }],
+            all: []};
+          this.templater.initTemplate('addFilterCheckBox', templateArrOfDataFirstFilter, firstFilterDivDOM, templateObjOfEvents, true);
+          this.domStorage.additionalFilters[`${templateArrOfDataFirstFilter[0].filterName}${templateArrOfDataFirstFilter[0].type}`] = document.querySelector(`.addFilter${templateArrOfDataFirstFilter[0].filterName}${templateArrOfDataFirstFilter[0].type}`);
+        });
+        
+        const secondFilterDivDOM = this.domStorage.additionalFilterDiv.divDOM.querySelector('.secondAddFilter');
+        propsObj.color.forEach(color => {
+          const templateArrOfDataSecondFilter = [{
+            filterName: 'color',
+            type: color
+          }];
+          const templateObjOfEvents = {
+            name: 'addFilter2',
+            one: [{
+              selector: `.addFilter${templateArrOfDataSecondFilter[0].filterName}${templateArrOfDataSecondFilter[0].type}`,
+              eventName: 'click',
+              funName: () => this.controller.initAddFilterCheckBox(undefined, templateArrOfDataSecondFilter[0].filterName, templateArrOfDataSecondFilter[0].type, 'secondAddFilter')
+            }],
+            all: []};
+          this.templater.initTemplate('addFilterCheckBox', templateArrOfDataSecondFilter, secondFilterDivDOM, templateObjOfEvents, true);
+          this.domStorage.additionalFilters[`${templateArrOfDataSecondFilter[0].filterName}${templateArrOfDataSecondFilter[0].type}`] = document.querySelector(`.addFilter${templateArrOfDataSecondFilter[0].filterName}${templateArrOfDataSecondFilter[0].type}`)
+        });
+
         break;
       }
       case 'fish': {
-        this.domStorage.additionalFilter.divDOM.innerHTML = 'fish';
+        
+        const templateArrOfDataForBox = [{
+          categName: categName,
+          firstFilterName: 'Zonality',
+          secondFilterName: 'Features'
+        }];
+        this.templater.initTemplate('addFilterBox', templateArrOfDataForBox, this.domStorage.additionalFilterDiv.divDOM);
+
+        const firstFilterDivDOM = this.domStorage.additionalFilterDiv.divDOM.querySelector('.firstAddFilter');
+        propsObj.zonality.forEach(zonality => {
+          const templateArrOfDataFirstFilter = [{
+            filterName: 'zonality',
+            type: zonality
+          }];
+          const templateObjOfEvents = {
+            name: 'addFilter1',
+            one: [{
+              selector: `.addFilter${templateArrOfDataFirstFilter[0].filterName}${templateArrOfDataFirstFilter[0].type}`,
+              eventName: 'click',
+              funName: () => this.controller.initAddFilterCheckBox(undefined, templateArrOfDataFirstFilter[0].filterName, templateArrOfDataFirstFilter[0].type, 'firstAddFilter')
+            }],
+            all: []};
+          this.templater.initTemplate('addFilterCheckBox', templateArrOfDataFirstFilter, firstFilterDivDOM, templateObjOfEvents, true);
+          this.domStorage.additionalFilters[`${templateArrOfDataFirstFilter[0].filterName}${templateArrOfDataFirstFilter[0].type}`] = document.querySelector(`.addFilter${templateArrOfDataFirstFilter[0].filterName}${templateArrOfDataFirstFilter[0].type}`);
+        });
+        
+        const secondFilterDivDOM = this.domStorage.additionalFilterDiv.divDOM.querySelector('.secondAddFilter');
+        propsObj.features.forEach(feature => {
+          const templateArrOfDataSecondFilter = [{
+            filterName: 'features',
+            type: feature
+          }];
+          const templateObjOfEvents = {
+            name: 'addFilter2',
+            one: [{
+              selector: `.addFilter${templateArrOfDataSecondFilter[0].filterName}${templateArrOfDataSecondFilter[0].type}`,
+              eventName: 'click',
+              funName: () => this.controller.initAddFilterCheckBox(undefined, templateArrOfDataSecondFilter[0].filterName, templateArrOfDataSecondFilter[0].type, 'secondAddFilter')
+            }],
+            all: []};
+          this.templater.initTemplate('addFilterCheckBox', templateArrOfDataSecondFilter, secondFilterDivDOM, templateObjOfEvents, true);
+          this.domStorage.additionalFilters[`${templateArrOfDataSecondFilter[0].filterName}${templateArrOfDataSecondFilter[0].type}`] = document.querySelector(`.addFilter${templateArrOfDataSecondFilter[0].filterName}${templateArrOfDataSecondFilter[0].type}`)
+        });
+
         break;
       }     
     }
@@ -180,6 +380,10 @@ class FilterView{
     }
   }
 
+  getAddFilterCheckBoxStatus(type, value){
+    return this.domStorage.additionalFilters[`${type}${value}`].checked;
+  }
+
   setSearchValue(val) {
     this.domStorage.name.inputDOM.value = val;
   }
@@ -187,6 +391,14 @@ class FilterView{
   setPriceOrQuantityValue(type, min, max){
     this.domStorage[type].minInputDOM.value = min;
     this.domStorage[type].maxInputDOM.value = max;
+  }
+
+  setCheckBoxState(type, value) {
+    if(type !== 'cancel'){
+      value.forEach((val) => {
+        this.domStorage.additionalFilters[`${type}${val}`].checked = true;
+      })
+    }
   }
 
 }

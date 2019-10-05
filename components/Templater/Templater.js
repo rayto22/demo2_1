@@ -13,6 +13,11 @@ class Templater{
       'cancelBtnTemplate': '/components/filter/cancelButtonTemplate.html',
       'categoryTemplate': '/components/filter/categoryTemplate.html',
       'mainFilterTemplate': '/components/filter/mainFilterTemplate.html',
+
+      'addFilterBox': '/components/filter/addFilterBox.html',
+      'addFilterCheckBox': '/components/filter/addFilterCheckBox.html',
+      'addFilterRadioButton': '/components/filter/addFilterRadioButton.html',
+
       // Sort
       'sortBtnTemplate': '/components/sort/sortBtnTemplate.html',
       // Products
@@ -94,6 +99,12 @@ class Templater{
       let coll = document.querySelector(ev.selector);
       [...coll].forEach(elDOM => {
         elDOM.addEventListener(ev.eventName, ev.funName);
+        this.eventsStorage[eventObj.name].push({
+          selector: ev.selector,
+          eventName: ev.eventName,
+          funName: ev.funName,
+          domEl: elDOM
+        });
       });
     });
   }

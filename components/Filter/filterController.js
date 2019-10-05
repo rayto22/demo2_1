@@ -9,15 +9,30 @@ class FilterController{
     this.view = new FilterView(this);
   }
 
+  rebuildProductList() {
+    this.eventManager.publish('request to rebuild product list');
+  }
+
   initFilterStatus() {
     this.model.initFilterStatus();
         
     this.renderCategories();
     this.renderMainFilter();
+    
+    const categName = this.model.getFilterProperty('category', 'status');
+    this.renderAdditionalFilter(categName, this.model.getAllPropsForCateg(categName));
 
     this.view.setSearchValue(this.model.filterStatus.name.lastValue);
     this.view.setPriceOrQuantityValue('price', this.model.filterStatus.price.min, this.model.filterStatus.price.max);
     this.view.setPriceOrQuantityValue('quantity', this.model.filterStatus.quantity.min, this.model.filterStatus.quantity.max);
+
+    const firstAddFilterType = this.model.getFilterProperty('firstAddFilter', 'type');
+    const firstAddFilterValue = this.model.getFilterProperty('firstAddFilter', 'value');
+    this.view.setCheckBoxState(firstAddFilterType, firstAddFilterValue);
+
+    const secondAddFilterType = this.model.getFilterProperty('secondAddFilter', 'type');
+    const secondAddFilterValue = this.model.getFilterProperty('secondAddFilter', 'value');
+    this.view.setCheckBoxState(secondAddFilterType, secondAddFilterValue);
   }
 
   filterProductList(prodArr) {
@@ -30,9 +45,6 @@ class FilterController{
     return filteredProdArr;
   }
 
-  rebuildProductList() {
-    this.eventManager.publish('request to rebuild product list');
-  }
 
   initFilterByName(arg) {
     const searchValue = this.getSearchValue();
@@ -47,9 +59,13 @@ class FilterController{
   }
 
   initFilterByCateg(categName) {
-    this.model.setFilterProperty('category', 'status', categName);
-    this.renderAdditionalFilter(categName);
-    this.rebuildProductList();
+    if(this.model.getFilterProperty('category', 'status') !== categName) {
+      this.model.setFilterProperty('category', 'status', categName);
+      const propsObj = this.model.getAllPropsForCateg(categName);
+      this.model.resetAddFilter();
+      this.renderAdditionalFilter(categName, propsObj);
+      this.rebuildProductList();
+    }
   }
 
   initFilterByPriceOrQuantity(arg, type) {
@@ -63,6 +79,26 @@ class FilterController{
       const minMaxValue = this.view.getPriceOrQuantityMinMaxValue(type);
       this.model.setFilterProperty(type, 'min', Number(minMaxValue.min.replace(/\D/g, '')) || 0);
       this.model.setFilterProperty(type, 'max', Number(minMaxValue.max.replace(/\D/g, '')) || Infinity);
+    }
+    this.rebuildProductList();
+  }
+
+  initAddFilterCheckBox(arg, type, value, addFilterNumber) {
+    if(arg === 'cancel') {
+      addFilterNumber = this.model.removeAllValuesFromAddFilterProperty(type);
+      this.model.setFilterProperty(addFilterNumber, 'status', 'cancel');
+    } else {
+      const checkBoxStatus = this.view.getAddFilterCheckBoxStatus(type, value);
+      if(checkBoxStatus === true) {
+        this.model.setFilterProperty(addFilterNumber, 'status', true);
+        this.model.setFilterProperty(addFilterNumber, 'type', type);
+        this.model.addValueToAddFilterProperty(addFilterNumber, 'value', value);
+      } else {
+        this.model.removeValueFromAddFilterProperty(addFilterNumber, 'value', value);
+        if(this.model.getAddFilterValue(addFilterNumber).length === 0) {
+          this.model.setFilterProperty(addFilterNumber, 'status', 'cancel');
+        }
+      }
     }
     this.rebuildProductList();
   }
@@ -95,8 +131,8 @@ class FilterController{
     this.view.renderMainFilter();
   }
 
-  renderAdditionalFilter(categName) {
-    this.view.renderAdditionalFilter(categName);
+  renderAdditionalFilter(categName, propsObj) {
+    this.view.renderAdditionalFilter(categName, propsObj);
   }
 
 }

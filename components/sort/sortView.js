@@ -66,10 +66,9 @@ class SortView{
 
   renderSortButtons() {
     this.templater.resetContainer(this.domStorage.sortBtnContainer.divDOM, 'sort');
-    this.templater.initTemplate('sortBtnTemplate', this.templateArrOfData, this.domStorage.sortBtnContainer.divDOM, this.templateObjOfEvents).then(() => {
-      [...document.querySelectorAll('.sortBtn')].forEach((sortTypeBtnDOM) => {
-        this.domStorage.sortBtnColl[sortTypeBtnDOM.getAttribute('data-sort-name')] = sortTypeBtnDOM;
-      });
+    this.templater.initTemplate('sortBtnTemplate', this.templateArrOfData, this.domStorage.sortBtnContainer.divDOM, this.templateObjOfEvents);
+    [...document.querySelectorAll('.sortBtn')].forEach((sortTypeBtnDOM) => {
+      this.domStorage.sortBtnColl[sortTypeBtnDOM.getAttribute('data-sort-name')] = sortTypeBtnDOM;
     });
   }
 }

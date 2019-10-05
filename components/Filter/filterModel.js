@@ -1,8 +1,6 @@
 class FilterModel{
-  constructor(contr) {
-    this.controller = contr;
-
-    window.addEventListener('unload', () => this.saveFilterStatus());
+  constructor() {
+    this.cancelButtonsArr = [];
   }
 
   initFilterStatus() {
@@ -26,18 +24,14 @@ class FilterModel{
             status: 'cancel',
             funName: 'filterByMinMax',
             min: 0,
-            max: Infinity,
-            minLastValue: '0',
-            maxLastValue: ''
+            max: Infinity
           },
           quantity: {
             type: 'quantity',
             status: 'cancel',
             funName: 'filterByMinMax',
             min: 0,
-            max: Infinity,
-            minLastValue: '0',
-            maxLastValue: ''
+            max: Infinity
           }
         }
       ));
@@ -54,29 +48,24 @@ class FilterModel{
   }
 
   saveFilterStatus(){
-    this.filterStatus.name.lastValue = this.controller.getSearchValue();
-    this.filterStatus.price.minLastValue = this.filterStatus.price.min;
-    this.filterStatus.price.maxLastValue = this.filterStatus.price.max !== Infinity ? this.filterStatus.price.max : '';
-    this.filterStatus.quantity.minLastValue = this.filterStatus.quantity.min;
-    this.filterStatus.quantity.maxLastValue = this.filterStatus.quantity.max !== Infinity ? this.filterStatus.quantity.max : '';
-    
     localStorage.setItem('filterStatus', JSON.stringify(this.filterStatus));
   }
 
   filterProductList(prodArr){
+    this.cancelButtonsArr.length = 0;
     Object.values(this.filterStatus).forEach((filter) => {
       if(filter.status !== 'cancel'){
         prodArr = this[filter.funName](prodArr, filter);
-        this.controller.renderCancelButton(filter.type);
+        this.cancelButtonsArr.push(filter.type);
       }
+      return false;
     });
     return prodArr;
   }
 
   filterByName(prodArr){
-    const searchValue = this.controller.getSearchValue();
     return prodArr.filter((prodObj) => {
-      return prodObj.name.toLowerCase().indexOf(searchValue) !== -1
+      return prodObj.name.toLowerCase().indexOf(this.filterStatus.name.lastValue) !== -1;
     })
   }
 
@@ -92,6 +81,10 @@ class FilterModel{
     return prodArr.filter((prodObj) => {
         return prodObj[filterType] >= filterData.min && prodObj[filterType] <= filterData.max;
     })
+  }
+
+  getCancelButtonsArr() {
+    return this.cancelButtonsArr;
   }
 }
 

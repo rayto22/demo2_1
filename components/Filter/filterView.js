@@ -35,13 +35,8 @@ class FilterView{
       category: {
         divDOM: document.querySelector('.categories_div')
       },
-      price: {
-        minInputDOM: document.querySelector('.filter_price_min'),
-        maxInputDOM: document.querySelector('.filter_price_max')
-      },
-      quantity: {
-        minInputDOM: document.querySelector('.filter_quantity_min'),
-        maxInputDOM: document.querySelector('.filter_quantity_max')
+      mainFilter: {
+        divDOM: document.querySelector('.main_filter')
       },
       additionalFilter: {
         divDOM: document.querySelector('.additional_filter')
@@ -54,29 +49,18 @@ class FilterView{
     this.hangEvents();
   }
 
-  hangEvents(){
-    // Search
-    this.domStorage.name.inputDOM.addEventListener('keyup', () => this.controller.initFilterByName());
-    // Price
-    this.domStorage.price.minInputDOM.addEventListener('keyup', () => this.controller.initFilterByPriceOrQuantity(undefined, 'price'));
-    this.domStorage.price.maxInputDOM.addEventListener('keyup', () => this.controller.initFilterByPriceOrQuantity(undefined, 'price'));
-    // Quantity
-    this.domStorage.quantity.minInputDOM.addEventListener('keyup', () => this.controller.initFilterByPriceOrQuantity(undefined, 'quantity'));
-    this.domStorage.quantity.maxInputDOM.addEventListener('keyup', () => this.controller.initFilterByPriceOrQuantity(undefined, 'quantity'));
-  }
-
   clearCancelButtonsDiv() {
     this.templater.resetContainer(this.domStorage.cancelFilter.divDOM, 'cancelButtonFilter');
   }
 
   renderCancelButton(type) {
-    let arrOfData = [
+    const arrOfData = [
       {
         className: this.cancelBtnObj[type].className, 
         buttonName: this.cancelBtnObj[type].btnName
       }];
 
-    let eventObj = {
+    const eventObj = {
       name: 'cancelButtonFilter',
       one: [{
         selector: `.${this.cancelBtnObj[type].className}`,
@@ -89,11 +73,11 @@ class FilterView{
   }
 
   renderCategories(categoriesList) {
-    let arrOfData = [...categoriesList].map((categ) => {
+    const arrOfData = [...categoriesList].map((categ) => {
       return {categName: categ, categContent: `${categ}s`};
     });
 
-    let eventObj = {
+    const eventObj = {
       name: 'category',
       one: [...categoriesList].map((categ) => {
         return {
@@ -105,6 +89,58 @@ class FilterView{
     };
 
     this.templater.initTemplate('categoryTemplate', arrOfData, this.domStorage.category.divDOM, eventObj);
+  }
+
+  hangEvents(){
+    window.addEventListener('unload', () => this.controller.saveFilterStatus());
+    this.domStorage.name.inputDOM.addEventListener('keyup', () => this.controller.initFilterByName());
+  }
+
+  renderMainFilter() {
+    const templateArrOfData = [{
+      filterHead: 'Filters',
+      filterPriceHead: 'Price',
+      filterQuantityHead: 'Quantity',
+    }];
+
+    const templateObjOfEvents = {
+      name: 'mainFilter',
+      one: [{
+        selector: '.filter_price_min',
+        eventName: 'keyup',
+        funName: () => this.controller.initFilterByPriceOrQuantity(undefined, 'price')
+      },
+      {
+        selector: '.filter_price_max',
+        eventName: 'keyup',
+        funName: () => this.controller.initFilterByPriceOrQuantity(undefined, 'price')
+      },
+      {
+        selector: '.filter_quantity_min',
+        eventName: 'keyup',
+        funName: () => this.controller.initFilterByPriceOrQuantity(undefined, 'quantity')
+      },
+      {
+        selector: '.filter_quantity_max',
+        eventName: 'keyup',
+        funName: () => this.controller.initFilterByPriceOrQuantity(undefined, 'quantity')
+      },
+    ],
+    all: []
+    };
+
+    this.templater.resetContainer(this.domStorage.mainFilter.divDOM, 'mainFilterTemplate');
+    this.templater.initTemplate('mainFilterTemplate', templateArrOfData, this.domStorage.mainFilter.divDOM, templateObjOfEvents);
+
+    this.domStorage.price = {
+      minInputDOM: document.querySelector('.filter_price_min'),
+      maxInputDOM: document.querySelector('.filter_price_max')
+    };
+    this.domStorage.quantity = {
+      minInputDOM: document.querySelector('.filter_quantity_min'),
+      maxInputDOM: document.querySelector('.filter_quantity_max')
+    };
+
   }
 
   renderAdditionalFilter(categName) {

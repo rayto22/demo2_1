@@ -1,3 +1,4 @@
+import { Templater } from '../templater/templater.js';
 import { EventManager } from '../eventManager/eventManager.js'
 import { ProductController } from '../product/productController.js';
 import { FilterController } from '../filter/filterController.js';
@@ -8,15 +9,16 @@ import { BasketController } from '../basket/basketController.js';
 class Mediator {
   constructor() {
     this.eventManager = new EventManager();
+    this.eventManager.subscribe('All templates was loaded', this.initPage.bind(this));
+    this.templater = new Templater(this.eventManager);
+  }
+
+  initPage() {
     this.filter = new FilterController(this.eventManager);
     this.sort = new SortController(this.eventManager);
     this.product = new ProductController(this.eventManager);
     this.basket = new BasketController(this.eventManager);
 
-    this.initPage();
-  }
-
-  initPage() {
     this.product.getProductList().then(() => {
       this.filter.initFilterStatus();
       this.sort.initSortStatus();

@@ -15,10 +15,6 @@ class ProductView{
   renderProductList(prodArr) {
     this.templater.resetContainer(this.domStorage.productListContainer.divDOM, 'productCards');
 
-    prodArr.forEach((prod) => {
-      console.log(prod.price);
-    })
-
     prodArr.forEach(prod => {
 
       if(prod.quantity <= 0){

@@ -16,7 +16,6 @@ class Templater{
 
       'addFilterBox': '/components/filter/addFilterBox.html',
       'addFilterCheckBox': '/components/filter/addFilterCheckBox.html',
-      'addFilterRadioButton': '/components/filter/addFilterRadioButton.html',
 
       // Sort
       'sortBtnTemplate': '/components/sort/sortBtnTemplate.html',

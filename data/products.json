@@ -2,7 +2,7 @@
   {
     "id": 1,
     "type": "cat",
-    "url": "data/img/pets/cats/siamskaya.jpg",
+    "url": "/img/1/prod.jpg",
     "name": "Siamese",
     "price": 100,
     "quantity": 2,
@@ -21,7 +21,7 @@
   {
     "id": 2,
     "type": "cat",
-    "url": "data/img/pets/cats/balines.jpg",
+    "url": "/img/2/prod.jpg",
     "name": "Balinese",
     "price": 150,
     "quantity": 1,
@@ -40,7 +40,7 @@
   {
     "id": 3,
     "type": "cat",
-    "url": "data/img/pets/cats/abussian.jpg",
+    "url": "/img/3/prod.jpg",
     "name": "Abyssinian",
     "price": 550,
     "quantity": 5,
@@ -59,7 +59,7 @@
   {
     "id": 4,
     "type": "cat",
-    "url": "data/img/pets/cats/bambino.jpg",
+    "url": "/img/4/prod.jpg",
     "name": "Bambino",
     "price": 1550,
     "quantity": 1,
@@ -78,7 +78,7 @@
   {
     "id": 5,
     "type": "cat",
-    "url": "data/img/pets/cats/bobtail.jpg",
+    "url": "/img/5/prod.jpg",
     "name": "American Bobtail",
     "price": 1550,
     "quantity": 1,
@@ -97,7 +97,7 @@
   {
     "id": 6,
     "type": "cat",
-    "url": "data/img/pets/cats/bengal.jpg",
+    "url": "/img/6/prod.jpg",
     "name": "Bengal",
     "price": 1650,
     "quantity": 2,
@@ -116,7 +116,7 @@
   {
     "id": 7,
     "type": "cat",
-    "url": "data/img/pets/cats/mainecoon.jpg",
+    "url": "/img/7/prod.jpg",
     "name": "Maine Coon",
     "price": 1750,
     "quantity": 1,
@@ -135,7 +135,7 @@
   {
     "id": 8,
     "type": "cat",
-    "url": "data/img/pets/cats/exoticshorthair.jpg",
+    "url": "/img/8/prod.jpg",
     "name": "Exotic Shorthair",
     "price": 900,
     "quantity": 3,
@@ -154,7 +154,7 @@
   {
     "id": 9,
     "type": "cat",
-    "url": "data/img/pets/cats/korat.jpg",
+    "url": "/img/9/prod.jpg",
     "name": "Korat",
     "price": 850,
     "quantity": 6,
@@ -173,7 +173,7 @@
   {
     "id": 10,
     "type": "cat",
-    "url": "data/img/pets/cats/peterbald.jpg",
+    "url": "/img/10/prod.jpg",
     "name": "Peterbald",
     "price": 650,
     "quantity": 1,
@@ -192,7 +192,7 @@
   {
     "id": 11,
     "type": "dog",
-    "url": "data/img/pets/dogs/bulldog.jpg",
+    "url": "/img/11/prod.jpg",
     "name": "English Bulldog",
     "price": 650,
     "quantity": 2,
@@ -211,7 +211,7 @@
   {
     "id": 12,
     "type": "dog",
-    "url": "data/img/pets/dogs/doberman.jpg",
+    "url": "/img/12/prod.jpg",
     "name": "Doberman",
     "price": 2650,
     "quantity": 1,
@@ -230,7 +230,7 @@
   {
     "id": 13,
     "type": "dog",
-    "url": "data/img/pets/dogs/kitayskaya.jpg",
+    "url": "/img/13/prod.jpg",
     "name": "Chinese Crested",
     "price": 5650,
     "quantity": 4,
@@ -249,7 +249,7 @@
   {
     "id": 14,
     "type": "dog",
-    "url": "data/img/pets/dogs/ovcharka.jpg",
+    "url": "/img/14/prod.jpg",
     "name": "German Shepherd",
     "price": 250,
     "quantity": 10,
@@ -268,7 +268,7 @@
   {
     "id": 15,
     "type": "dog",
-    "url": "data/img/pets/dogs/taksa.jpg",
+    "url": "/img/15/prod.jpg",
     "name": "Dachshund",
     "price": 950,
     "quantity": 2,
@@ -287,7 +287,7 @@
   {
     "id": 16,
     "type": "dog",
-    "url": "data/img/pets/dogs/pug.jpg",
+    "url": "/img/16/prod.jpg",
     "name": "Pug",
     "price": 750,
     "quantity": 3,
@@ -306,7 +306,7 @@
   {
     "id": 17,
     "type": "dog",
-    "url": "data/img/pets/dogs/beagle.jpg",
+    "url": "/img/17/prod.jpg",
     "name": "Beagle",
     "price": 950,
     "quantity": 3,
@@ -325,7 +325,7 @@
   {
     "id": 18,
     "type": "dog",
-    "url": "data/img/pets/dogs/poodle.jpg",
+    "url": "/img/18/prod.jpg",
     "name": "Poodle",
     "price": 1050,
     "quantity": 1,
@@ -344,7 +344,7 @@
   {
     "id": 19,
     "type": "dog",
-    "url": "data/img/pets/dogs/americanbully.jpg",
+    "url": "/img/19/prod.jpg",
     "name": "American Bully",
     "price": 1550,
     "quantity": 2,
@@ -363,7 +363,7 @@
   {
     "id": 20,
     "type": "dog",
-    "url": "data/img/pets/dogs/papillon.jpg",
+    "url": "/img/20/prod.jpg",
     "name": "Papillon",
     "price": 1700,
     "quantity": 1,
@@ -382,7 +382,7 @@
   {
     "id": 21,
     "type": "fish",
-    "url": "data/img/pets/fish/astronotus.jpg",
+    "url": "/img/21/prod.jpg",
     "name": "Astronotus",
     "price": 50,
     "quantity": 15,
@@ -398,7 +398,7 @@
   {
     "id": 22,
     "type": "fish",
-    "url": "data/img/pets/fish/coryphaena.jpg",
+    "url": "/img/22/prod.jpg",
     "name": "Coryphaena hippurus",
     "price": 220,
     "quantity": 5,
@@ -414,7 +414,7 @@
   {
     "id": 23,
     "type": "fish",
-    "url": "data/img/pets/fish/betta.jpg",
+    "url": "/img/23/prod.jpg",
     "name": "Betta splendens",
     "price": 920,
     "quantity": 5,
@@ -430,7 +430,7 @@
   {
     "id": 24,
     "type": "fish",
-    "url": "data/img/pets/fish/ancistrus.jpg",
+    "url": "/img/24/prod.jpg",
     "name": "Ancistrus",
     "price": 20,
     "quantity": 50,
@@ -446,7 +446,7 @@
   {
     "id": 25,
     "type": "fish",
-    "url": "data/img/pets/fish/guppi.jpg",
+    "url": "/img/25/prod.jpg",
     "name": "Guppi",
     "price": 10,
     "quantity": 2,
@@ -462,7 +462,7 @@
   {
     "id": 26,
     "type": "fish",
-    "url": "data/img/pets/fish/goldfish.jpg",
+    "url": "/img/26/prod.jpg",
     "name": "Goldfish",
     "price": 15,
     "quantity": 7,
@@ -478,7 +478,7 @@
   {
     "id": 27,
     "type": "fish",
-    "url": "data/img/pets/fish/dwarfgourami.jpg",
+    "url": "/img/27/prod.jpg",
     "name": "Dwarf gourami",
     "price": 35,
     "quantity": 2,
@@ -494,7 +494,7 @@
   {
     "id": 28,
     "type": "fish",
-    "url": "data/img/pets/fish/pygmycorydoras.jpg",
+    "url": "/img/28/prod.jpg",
     "name": "Pygmy corydoras",
     "price": 5,
     "quantity": 8,
@@ -510,7 +510,7 @@
   {
     "id": 29,
     "type": "fish",
-    "url": "data/img/pets/fish/pearldanio.jpg",
+    "url": "/img/29/prod.jpg",
     "name": "Pearl danio",
     "price": 20,
     "quantity": 25,
@@ -526,7 +526,7 @@
   {
     "id": 30,
     "type": "fish",
-    "url": "data/img/pets/fish/kamfa.jpg",
+    "url": "/img/30/prod.jpg",
     "name": "Kamfa",
     "price": 75,
     "quantity": 2,
@@ -542,7 +542,7 @@
   {
     "id": 31,
     "type": "bird",
-    "url": "data/img/pets/bird/canary.jpg",
+    "url": "/img/31/prod.jpg",
     "name": "Canary",
     "price": 50,
     "quantity": 2,
@@ -559,7 +559,7 @@
   {
     "id": 32,
     "type": "bird",
-    "url": "data/img/pets/bird/aratingi.jpg",
+    "url": "/img/32/prod.jpg",
     "name": "Aratingi",
     "price": 100,
     "quantity": 2,
@@ -576,7 +576,7 @@
   {
     "id": 33,
     "type": "bird",
-    "url": "data/img/pets/bird/сockatoo.jpg",
+    "url": "/img/33/prod.jpg",
     "name": "Cockatoo",
     "price": 2000,
     "quantity": 4,
@@ -593,7 +593,7 @@
   {
     "id": 34,
     "type": "bird",
-    "url": "data/img/pets/bird/sova.jpg",
+    "url": "/img/34/prod.jpg",
     "name": "Owl",
     "price": 6000,
     "quantity": 1,
@@ -610,7 +610,7 @@
   {
     "id": 35,
     "type": "bird",
-    "url": "data/img/pets/bird/jaco.jpg",
+    "url": "/img/35/prod.jpg",
     "name": "Jaco",
     "price": 600,
     "quantity": 4,
@@ -627,7 +627,7 @@
   {
     "id": 36,
     "type": "bird",
-    "url": "data/img/pets/bird/monkparakeet.jpg",
+    "url": "/img/36/prod.jpg",
     "name": "Monk parakeet",
     "price": 900,
     "quantity": 2,
@@ -644,7 +644,7 @@
   {
     "id": 37,
     "type": "bird",
-    "url": "data/img/pets/bird/bluewinged.jpg",
+    "url": "/img/37/prod.jpg",
     "name": "Blue-winged",
     "price": 1500,
     "quantity": 1,
@@ -661,7 +661,7 @@
   {
     "id": 38,
     "type": "bird",
-    "url": "data/img/pets/bird/westernrosella.jpg",
+    "url": "/img/38/prod.jpg",
     "name": "Western rosella",
     "price": 850,
     "quantity": 3,
@@ -678,7 +678,7 @@
   {
     "id": 39,
     "type": "bird",
-    "url": "data/img/pets/bird/jandayaparakeet.jpg",
+    "url": "/img/39/prod.jpg",
     "name": "Jandaya parakeet",
     "price": 1150,
     "quantity": 1,
@@ -695,7 +695,7 @@
   {
     "id": 40,
     "type": "bird",
-    "url": "data/img/pets/bird/magpie.jpg",
+    "url": "/img/40/prod.jpg",
     "name": "Magpie",
     "price": 350,
     "quantity": 3,

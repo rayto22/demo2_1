@@ -28,11 +28,11 @@ class FilterController{
 
     const firstAddFilterType = this.model.getFilterProperty('firstAddFilter', 'type');
     const firstAddFilterValue = this.model.getFilterProperty('firstAddFilter', 'value');
-    this.view.setCheckBoxState(firstAddFilterType, firstAddFilterValue);
+    this.view.setCheckBoxState(firstAddFilterType, firstAddFilterValue, true);
 
     const secondAddFilterType = this.model.getFilterProperty('secondAddFilter', 'type');
     const secondAddFilterValue = this.model.getFilterProperty('secondAddFilter', 'value');
-    this.view.setCheckBoxState(secondAddFilterType, secondAddFilterValue);
+    this.view.setCheckBoxState(secondAddFilterType, secondAddFilterValue, true);
   }
 
   filterProductList(prodArr) {
@@ -85,6 +85,15 @@ class FilterController{
 
   initAddFilterCheckBox(arg, type, value, addFilterNumber) {
     if(arg === 'cancel') {
+
+      const firstAddFilterType = this.model.getFilterProperty('firstAddFilter', 'type');
+      const firstAddFilterValue = this.model.getFilterProperty('firstAddFilter', 'value');
+      this.view.setCheckBoxState(firstAddFilterType, firstAddFilterValue, false);
+  
+      const secondAddFilterType = this.model.getFilterProperty('secondAddFilter', 'type');
+      const secondAddFilterValue = this.model.getFilterProperty('secondAddFilter', 'value');
+      this.view.setCheckBoxState(secondAddFilterType, secondAddFilterValue, false);
+
       addFilterNumber = this.model.removeAllValuesFromAddFilterProperty(type);
       this.model.setFilterProperty(addFilterNumber, 'status', 'cancel');
     } else {

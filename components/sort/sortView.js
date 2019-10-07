@@ -5,6 +5,8 @@ class SortView{
     this.controller = contr;
     this.templater = new Templater;
 
+    window.addEventListener('unload', () => this.controller.saveSortStatus());
+
     this.domStorage = {
       sortBtnContainer: {
         divDOM : document.querySelector('.sort_buttons_div')

@@ -1,13 +1,12 @@
 class SortModel{
   constructor(contr) {
     this.controller = contr;
-
-    window.addEventListener('unload', () => this.saveSortStatus());
   }
 
   initSortStatus() {
-    localStorage.removeItem('sortStatus');
-    if(Boolean(localStorage.getItem('sortStatus')) === false){
+    // localStorage.removeItem('sortStatus');
+    const sortStatus = localStorage.getItem('sortStatus');
+    if(Boolean(sortStatus) === false || sortStatus === 'undefined'){
       localStorage.setItem('sortStatus', JSON.stringify(
         {
           status: "cancel",

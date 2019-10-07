@@ -21,6 +21,7 @@ class Mediator {
     this.basket = new BasketController(this.eventManager);
 
     this.product.getProductList().then(() => {
+      this.basket.initBasketStatus();
       this.filter.initFilterStatus();
       this.sort.initSortStatus();
       this.buildProductList();

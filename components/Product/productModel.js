@@ -31,10 +31,15 @@ class ProductModel{
             }
           }
         });
-        localStorage.setItem('productList', JSON.stringify(d));
+        const productList = localStorage.getItem('productList');
+        if(Boolean(productList) === false || productList === 'undefined'){
+          console.log(11);
+          localStorage.setItem('productList', JSON.stringify(d));
+        }
         this.eventManager.publish('Products were received', d);
       });
   }
+
 }
 
 export { ProductModel };

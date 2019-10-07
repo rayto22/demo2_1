@@ -38,6 +38,10 @@ class SortController{
   unsetOrderIconToButton(sortType) {
     this.view.unsetOrderIconToButton(sortType);
   }
+
+  saveSortStatus(){
+    this.model.saveSortStatus();
+  }
 }
 
 export { SortController }

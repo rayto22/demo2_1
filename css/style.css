@@ -12,6 +12,7 @@
   height: 140px;
   width: 140px;
   margin-bottom: 0px !important;
+  padding: 0px;
 }
 .prod_name_div{
   margin: 10px 0px 10px 0px;
@@ -36,4 +37,7 @@
 .sort_buttons_div{
   display: flex;
   justify-content: flex-end;
+}
+.modal_window_basket_content .box{
+  margin: 10px 0px 10px 0px;
 }

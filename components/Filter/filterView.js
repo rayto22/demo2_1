@@ -393,10 +393,10 @@ class FilterView{
     this.domStorage[type].maxInputDOM.value = max;
   }
 
-  setCheckBoxState(type, value) {
+  setCheckBoxState(type, value, state) {
     if(type !== 'cancel'){
       value.forEach((val) => {
-        this.domStorage.additionalFilters[`${type}${val}`].checked = true;
+        this.domStorage.additionalFilters[`${type}${val}`].checked = state;
       })
     }
   }

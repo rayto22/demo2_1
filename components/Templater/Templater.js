@@ -13,15 +13,17 @@ class Templater{
       'cancelBtnTemplate': '/components/filter/cancelButtonTemplate.html',
       'categoryTemplate': '/components/filter/categoryTemplate.html',
       'mainFilterTemplate': '/components/filter/mainFilterTemplate.html',
-
       'addFilterBox': '/components/filter/addFilterBox.html',
       'addFilterCheckBox': '/components/filter/addFilterCheckBox.html',
-
       // Sort
       'sortBtnTemplate': '/components/sort/sortBtnTemplate.html',
       // Products
       'productCardTemplate': '/components/productCard/productCardTemplate.html',
-      'productCardInfoModalTemplate': '/components/productCard/productCardInfoModalTemplate.html'
+      'productCardInfoModalTemplate': '/components/productCard/productCardInfoModalTemplate.html',
+      // Basket
+      'basketBtnTemplate': '/components/basket/basketBtnTemplate.html',
+      'basketModalTemplate': '/components/basket/basketModalTemplate.html',
+      'basketModalContentTemplate': '/components/basket/basketModalContentTemplate.html'
     };
     this.templatesQuantity = Object.keys(this.templatePathColl).length;
     this.templatesQuantityLoaded = 0;
@@ -64,7 +66,7 @@ class Templater{
       this.eventsStorage[name].forEach(el => {
         el.domEl.removeEventListener(el.eventName, el.funName);
       });
-      this.eventsStorage[name].length = 0;
+      delete this.eventsStorage[name];
     }
     if(dom !== false){
       dom.innerHTML = '';
@@ -102,12 +104,17 @@ class Templater{
 
   hangEvents(eventObj) {
 
-    this.eventsStorage[eventObj.name] = eventObj.one.map(ev => {
+    const newEventArr = eventObj.one.map(ev => {
       ev.domEl = document.querySelector(ev.selector);
       ev.domEl.addEventListener(ev.eventName, ev.funName);
       return ev;
     });
-
+    if(this.eventsStorage.hasOwnProperty(eventObj.name)){
+      this.eventsStorage[eventObj.name] = this.eventsStorage[eventObj.name].concat(newEventArr);
+    } else {
+      this.eventsStorage[eventObj.name] = newEventArr;
+    }
+    
     eventObj.all.forEach(ev => {
       let coll = document.querySelector(ev.selector);
       [...coll].forEach(elDOM => {
